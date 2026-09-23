@@ -1,0 +1,24 @@
+{
+  "python": "3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:12:50) [MSC v.1942 64 bit (AMD64)]",
+  "packages": {
+    "numpy": "2.5.1",
+    "pandas": "2.3.3",
+    "scipy": "1.18.0",
+    "matplotlib": "3.11.0",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.5.3",
+    "pyarrow": "25.0.1",
+    "lxml": "6.1.1",
+    "torch": "2.14.0+cu130",
+    "neuralforecast": "3.2.2",
+    "chronos-forecasting": "2.3.2",
+    "timesfm": "3.0.2",
+    "transformers": "5.17.0",
+    "huggingface-hub": "1.32.0",
+    "einops": "0.8.2",
+    "pytorch-lightning": "2.5.6",
+    "safetensors": "0.8.0",
+    "accelerate": "1.15.0"
+  },
+  "note": "Observed packaging/training environment; per-experiment environment and protocol files are retained in the research archive. Dependency directories are not redistributed."
+}

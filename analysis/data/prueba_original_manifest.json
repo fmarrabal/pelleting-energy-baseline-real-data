@@ -1,0 +1,76 @@
+{
+  "fecha_ejecucion_utc": "2026-09-21T08:54:14.581921+00:00",
+  "candidatos": 798,
+  "evaluados": 798,
+  "excluidos": 0,
+  "inicio_min": "2025-03-06 00:00:25.273000",
+  "inicio_max": "2025-04-01 17:28:07.497000",
+  "fin_max": "2025-04-02 04:03:40.940000",
+  "dias_observados": 27,
+  "metricas_puntuales": [
+    {
+      "modelo": "Ridge",
+      "n": 798,
+      "MAE": 52.448851035284356,
+      "RMSE": 80.41857997514578,
+      "sesgo": -21.888685880369014,
+      "WAPE": 0.19114894088038747
+    },
+    {
+      "modelo": "SEC",
+      "n": 798,
+      "MAE": 61.28719626571655,
+      "RMSE": 92.05403606492699,
+      "sesgo": -24.574631953638605,
+      "WAPE": 0.22336013896355975
+    }
+  ],
+  "metricas_intervalos": [
+    {
+      "nominal": "90",
+      "n": 798,
+      "cobertura": 0.8596491228070176,
+      "ancho_medio": 183.63454092153682,
+      "interval_score": 381.7922836953245
+    },
+    {
+      "nominal": "95",
+      "n": 798,
+      "cobertura": 0.9323308270676691,
+      "ancho_medio": 258.84975799401803,
+      "interval_score": 497.63564484197326
+    }
+  ],
+  "bootstrap": {
+    "reduccion_MAE_kWh": 8.838345230432196,
+    "IC95_reduccion": [
+      6.075561446392518,
+      11.503381908333228
+    ],
+    "reduccion_relativa_pct": 14.421193608062433,
+    "IC95_cobertura_90": [
+      0.8186279008683292,
+      0.9024390243902439
+    ],
+    "IC95_cobertura_95": [
+      0.9053228021978021,
+      0.9587485885234122
+    ]
+  },
+  "alertas_altas": 45,
+  "alertas_bajas": 9,
+  "duracion_mayor_24h": 5,
+  "categorias_desconocidas": {
+    "linea": 0,
+    "subfamilia": 0,
+    "forma": 0,
+    "salida_programada": 0
+  },
+  "modelo_sha256": "b355bf285ddda6aa6c06d8d55136fbddcc598358105fa0155d1d22a9948117e2",
+  "protocolo_sha256": "919a53ec88165e21ebed65c227b48bed82fa80b8b28c3953a1880c64b77a1783",
+  "fuente_sha256": "c462f92a8b0c66776d8e46933bd5ca8391e4a9ae8bde5c607d29e80a4677dda4",
+  "script_sha256": "6a5485512424e08b51e1999860f1fda424da62ecaaa7ecf00e0dda02abbebcf8",
+  "reajustado": false,
+  "recalibrado": false,
+  "estado": "PRUEBA_EVALUADA_RETROSPECTIVA_CONDICIONAL"
+}

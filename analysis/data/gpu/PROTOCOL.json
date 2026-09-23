@@ -1,0 +1,186 @@
+{
+  "status": "EXPLORATORY_DEVELOPMENT_ONLY",
+  "created_utc": "2026-09-22T09:12:59.425896+00:00",
+  "question": "Do modern temporal models add predictive value for real pelleting energy records?",
+  "target": "energia_peletizado_kWh",
+  "context_records": 16,
+  "horizon": 1,
+  "horizon_semantics": "Nominated current industrial record, conditional on its consolidated plan covariates; event positions are not uniform physical time.",
+  "partition_policy": "Every context and target stays within the same machine and partition interval. Validation history resets each outer week; inner validation also resets. Completed earlier validation labels can enter later contexts but never model weight fitting.",
+  "history_availability": "fin_peletizado strictly earlier than inicio_registro; completion used as proxy for actual data publication.",
+  "batch_identity": "Original rows are industrial records; unique physical batch/cycle identity is not verified. No synthetic cycle identifiers are inferred.",
+  "features_numeric": [
+    "masa_dosificada_t",
+    "baches_dosificacion",
+    "hora_sin",
+    "hora_cos",
+    "dia_sin",
+    "dia_cos"
+  ],
+  "features_categorical": [
+    "linea",
+    "subfamilia",
+    "forma",
+    "salida_programada"
+  ],
+  "forbidden": "current energy, current duration, current operational averages, produced mass, future labels",
+  "availability_caveat": "Dosified mass, batch count and product metadata are consolidated records; their planned values at origin are unverified. Retrospective conditional baseline, not validated pre-operation forecast.",
+  "folds": [
+    [
+      "2025-01-25",
+      "2025-02-01"
+    ],
+    [
+      "2025-02-01",
+      "2025-02-08"
+    ],
+    [
+      "2025-02-08",
+      "2025-02-15"
+    ],
+    [
+      "2025-02-15",
+      "2025-02-22"
+    ]
+  ],
+  "sample_counts": [
+    {
+      "fold": "2025-01-25",
+      "train": 650,
+      "inner_train": 447,
+      "inner_val": 141,
+      "val": 151
+    },
+    {
+      "fold": "2025-02-01",
+      "train": 869,
+      "inner_train": 650,
+      "inner_val": 151,
+      "val": 133
+    },
+    {
+      "fold": "2025-02-08",
+      "train": 1066,
+      "inner_train": 869,
+      "inner_val": 133,
+      "val": 151
+    },
+    {
+      "fold": "2025-02-15",
+      "train": 1279,
+      "inner_train": 1066,
+      "inner_val": 151,
+      "val": 149
+    }
+  ],
+  "eligible_total": 584,
+  "original_candidates": 800,
+  "TFT": {
+    "hidden_size": 32,
+    "n_head": 4,
+    "dropout": 0.1
+  },
+  "NHITS": {
+    "mlp_units": [
+      [
+        64,
+        64
+      ],
+      [
+        64,
+        64
+      ],
+      [
+        64,
+        64
+      ]
+    ],
+    "n_blocks": [
+      1,
+      1,
+      1
+    ],
+    "n_pool_kernel_size": [
+      2,
+      2,
+      1
+    ],
+    "n_freq_downsample": [
+      1,
+      1,
+      1
+    ]
+  },
+  "supervised_selection": {
+    "architectures_per_family": 1,
+    "seeds": [
+      11,
+      29,
+      47
+    ],
+    "max_epochs": 40,
+    "minimum_epochs": 10,
+    "patience": 8,
+    "batch_size": 64,
+    "optimizer": "Adam",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "loss": "MSE standardized target",
+    "gradient_clip_norm": 1.0,
+    "rule": "Select best epoch separately for each seed on preceding 7-day inner validation, never outer validation. Refit each seed from scratch on complete outer training using its selected epoch. Primary prediction is mean of three nonnegative seed predictions."
+  },
+  "ridge": {
+    "alpha": 10,
+    "controls": [
+      "current covariates only",
+      "current covariates plus full flattened window; no hyperparameter search"
+    ]
+  },
+  "foundations": {
+    "TimesFM_2.5": {
+      "repo": "google/timesfm-2.5-200m-pytorch",
+      "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3"
+    },
+    "Chronos_2": {
+      "repo": "amazon/chronos-2",
+      "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c"
+    }
+  },
+  "foundation_policy": "Frozen weights, zero-shot. Native univariate controls and covariate variants. Chronos-2 native past+future covariates, cross_learning=False. TimesFM 2.5 native XReg + TimesFM, ridge=10, separate call per origin to avoid pooling future labels across query windows. Both use exactly 16 completed records; no target labels supplied.",
+  "metrics": [
+    "MAE",
+    "RMSE",
+    "bias",
+    "WAPE",
+    "by fold",
+    "by machine",
+    "seed variability",
+    "raw negative predictions"
+  ],
+  "inference": "paired circular blocks of 3 observed dates, 5000 bootstrap draws, seed=20260922; differences versus matched Ridge; exploratory, no universal superiority claim",
+  "device_policy": "GPU if >=4096 MiB free at process launch; otherwise CPU. Never stop other workloads.",
+  "protected_sha256": {
+    "Datos Planta Peletizado.xlsx": "d5968030da3e704e7505e9512151824d9384ae5e68259b71d01e1e9ee7647395",
+    "depuracion_v1/registros_depurados.csv": "c462f92a8b0c66776d8e46933bd5ca8391e4a9ae8bde5c607d29e80a4677dda4",
+    "calibracion_final_v1/modelo_calibrado.joblib": "b355bf285ddda6aa6c06d8d55136fbddcc598358105fa0155d1d22a9948117e2",
+    "prueba_final_v1/predicciones_prueba.csv": "f37c8ad7a244e6a4900b9ebdd705d4fbcfce885fc26dd352841416fe5c828999",
+    "paper_datos_reales_v1/Paper_Peletizado_Datos_Reales_v1.pdf": "7e24acbd4902bdc4c5c4e00371e337a0f5e3396539ba8b67237abaeb44cde020",
+    "paper_latex_v3/Paper_Pelleting_Energy_Baselines_v3.pdf": "2b8e58be66c6041e85be161d98ac5185761519ec2bdd3ddb644600460c6376d9"
+  },
+  "versions": {
+    "python": "3.13.13",
+    "torch": "2.14.0+cu130",
+    "neuralforecast": "3.2.2",
+    "timesfm": "3.0.2",
+    "chronos-forecasting": "2.3.2",
+    "numpy": "2.5.1",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.0"
+  },
+  "sources": [
+    "https://nixtlaverse.nixtla.io/neuralforecast/models.tft.html",
+    "https://nixtlaverse.nixtla.io/neuralforecast/models.nhits.html",
+    "https://github.com/google-research/timesfm",
+    "https://github.com/amazon-science/chronos-forecasting"
+  ]
+}

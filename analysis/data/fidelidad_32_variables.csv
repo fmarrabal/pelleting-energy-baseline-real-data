@@ -1,0 +1,33 @@
+﻿original,columna_analitica,n,coinciden
+DES_PRODUCTO_TIPO,salida_programada,2745,2745
+N_BACHES_DOS,baches_dosificacion,2745,2745
+PESO DOS (kg),masa_dosificada_kg,2745,2745
+PELLT,linea,2745,2745
+CANTIDAD_BACHES_PEL,baches_peletizado,2745,2745
+CANT PELETIZADA,produccion_t_asumida,2745,2745
+KWH PELET,energia_peletizado_kWh,2745,2745
+PRESION VAPOR (psi),presion_vapor_psig,2745,2745
+VAPOR (Lb),masa_vapor_lb,2745,2745
+TEMP_ACONDICIONADOR,temperatura_acond_C,2745,2745
+AMPERAJE_PEL,corriente_peletizado_A,2745,2745
+FEC_INI_PEL_TS,inicio_peletizado,2745,2745
+FEC_FIN_PEL_TS,fin_peletizado,2745,2745
+N_BACHES_MOL,baches_molienda,2745,2745
+FEC_INI_MOL,inicio_molienda,2745,2745
+FEC_FIN_MOL,fin_molienda,2745,2745
+KWH MOL,energia_molienda_kWh,2745,2745
+TEMP_DEVANADO,temperatura_devanado_C,2745,2745
+TEMP_ROD_DELANTERO,temperatura_rod_del_C,2745,2745
+TEMP_ROD_TRASERO,temperatura_rod_tras_C,2745,2745
+AMPERAJE_MOL,corriente_molienda_A,2745,2745
+N_BACHES_MEZ,baches_mezclado,2745,2745
+FEC_INI_MEZ,inicio_mezclado,2745,2745
+FEC_FIN_MEZ,fin_mezclado,2745,2745
+KWH MEZ,energia_mezclado_kWh,2745,2745
+AMPERAJE_MEZ,corriente_mezclado_A,2745,2745
+UNIDADINVENTARIO,unidad_inventario,2745,2745
+AGRUPACION_INVENTARIO,grupo_inventario,2745,2745
+LINEA,familia,2745,2745
+SUBLINEA,subfamilia,2745,2745
+PRESENTACION,forma,2745,2745
+EMPAQUE,empaque_final,2745,2745

@@ -1,0 +1,14 @@
+{
+  "status": "POST_HOC_DIAGNOSTIC_NO_PRIMARY_CHANGES",
+  "use_arcsinh": true,
+  "native_prepared_channels_checked": 6424,
+  "categorical_encoding": "Official per-item target encoding, based only on completed context labels; same 16-query preprocessing batches as primary run.",
+  "constant_channels": 1097,
+  "constant_channels_context_difference_over_0_1": 694,
+  "nonconstant_channels_context_difference_over_0_1": 0,
+  "max_normalized_context_difference": 0.8813735842704773,
+  "max_normalized_future_difference": 0.8813735842704773,
+  "source_rule": "Native InstanceNorm substitutes eps only when scale equals exactly zero. Near-zero residual variance can amplify different CPU/GPU reductions.",
+  "interpretation": "This reproduces a normalization discrepancy on actual covariates. It is a mechanism consistent with the frozen-model prediction differences, not a completed end-to-end correction or a causal attribution of every residual.",
+  "primary_predictions_modified": false
+}

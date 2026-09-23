@@ -1,0 +1,136 @@
+{
+  "kind": "real",
+  "date": "2026-09-23",
+  "fresh_training_executed": false,
+  "original_scripts_parsed": 40,
+  "pages": 24,
+  "pages_with_text_difference": [],
+  "raster_comparison_72dpi": [
+    {
+      "page": 1,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 2,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 3,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 4,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 5,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 6,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 7,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 8,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 9,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 10,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 11,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 12,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 13,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 14,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 15,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 16,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 17,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 18,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 19,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 20,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 21,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 22,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 23,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    },
+    {
+      "page": 24,
+      "mean_absolute_pixel_difference": 0.0,
+      "fraction_changed_pixels": 0.0
+    }
+  ],
+  "max_mean_absolute_pixel_difference": 0.0,
+  "credential_pattern_hits": [],
+  "original_pdf_byte_preserved": true,
+  "status": "PASS",
+  "visual_review": "Original and rebuilt contact sheets inspected; all 49 pages across both papers also match pixel-for-pixel at 72 dpi.",
+  "training_recipe_smoke_test": "Prepared independent GPU run; code hashed, prior target-stage outputs excluded, no training executed."
+}

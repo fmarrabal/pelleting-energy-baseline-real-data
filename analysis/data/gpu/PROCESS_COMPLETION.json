@@ -1,0 +1,12 @@
+[
+  {
+    "script": "run_supervised.py",
+    "exit_code": 0,
+    "seconds": 581.2601189999841
+  },
+  {
+    "script": "run_foundation.py",
+    "exit_code": 0,
+    "seconds": 290.70745769992936
+  }
+]

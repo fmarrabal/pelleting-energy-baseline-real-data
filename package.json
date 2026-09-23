@@ -1,0 +1,69 @@
+{
+  "repo": "pelleting-energy-baseline-real-data",
+  "pdf": "Paper_Peletizado_Datos_Reales_v3.pdf",
+  "title": "Explainable energy baselines for industrial feed pelleting: a chronological comparison of regression, temporal and foundation models",
+  "recipes": {
+    "real-static": {
+      "reset_folders": [
+        "depuracion_v1",
+        "analisis_desarrollo_v2",
+        "calibracion_final_v1",
+        "prueba_final_v1"
+      ],
+      "commands": [
+        [
+          "depuracion_v1/depurar.py"
+        ],
+        [
+          "piloto_desarrollo/continuar_analisis.py"
+        ],
+        [
+          "piloto_desarrollo/calibrar_final.py"
+        ],
+        [
+          "piloto_desarrollo/evaluar_prueba_final.py"
+        ]
+      ],
+      "meaning": "Rebuild the cleaned records from the original workbook, repeat static-model development, freeze/calibrate Ridge and evaluate the fixed final test. Archived exploratory and temporal outputs are retained as separate references."
+    },
+    "real-gpu": {
+      "reset_folders": [
+        "modelos_reales_gpu_v1"
+      ],
+      "keep_files": [
+        "PROTOCOL.json",
+        "PROTOCOL_LOCK.json",
+        "donor_audit.csv",
+        "sample_membership.csv",
+        "warmup_exclusions.csv"
+      ],
+      "commands": [
+        [
+          "modelos_reales_gpu_v1/run_supervised.py"
+        ],
+        [
+          "modelos_reales_gpu_v1/run_foundation.py"
+        ],
+        [
+          "modelos_reales_gpu_v1/analyze.py"
+        ],
+        [
+          "modelos_reales_gpu_v1/compare_cpu_gpu.py"
+        ]
+      ],
+      "meaning": "Retrain the frozen temporal GPU protocol on the archived cleaned development records: four outer folds, three seeds, inner epoch selection/refit, then pinned zero-shot foundation inference. The final static test is untouched."
+    }
+  },
+  "kind": "real",
+  "version": "v3-reproducibility",
+  "foundations": {
+    "TimesFM_2.5": {
+      "repo": "google/timesfm-2.5-200m-pytorch",
+      "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3"
+    },
+    "Chronos_2": {
+      "repo": "amazon/chronos-2",
+      "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c"
+    }
+  }
+}

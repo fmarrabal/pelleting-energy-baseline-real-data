@@ -1,0 +1,14 @@
+{
+  "research": {
+    "name": "pelleting-energy-baseline-real-data-research-v3.zip",
+    "bytes": 69404412,
+    "sha256": "97168913a949e71a5eb8758f9289731e980cf24e285783f0b166b7593f842662",
+    "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v3-reproducibility/pelleting-energy-baseline-real-data-research-v3.zip"
+  },
+  "overleaf": {
+    "name": "pelleting-energy-baseline-real-data-Overleaf.zip",
+    "bytes": 1878950,
+    "sha256": "feba9acfe786d1e123f375a48b435da7b07ea719e7b9073fb557ae40f1229d00",
+    "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v3-reproducibility/pelleting-energy-baseline-real-data-Overleaf.zip"
+  }
+}

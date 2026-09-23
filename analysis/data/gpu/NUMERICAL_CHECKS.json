@@ -1,0 +1,227 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "checks": [
+    {
+      "model": "TFT",
+      "fold": "2025-01-25",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578110789145e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-01-25",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-01-25",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 1.52587890625e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-01-25",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-01-25",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 1.52587890625e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-01-25",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-01",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578110789145e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-01",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-01",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-01",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 6.103515625e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-01",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 4.57763671875e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-01",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 6.103515625e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-08",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-08",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 1.525878903407829e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-08",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 1.525878909092171e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-08",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-08",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 1.525878909092171e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-08",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-15",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-15",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "TFT",
+      "fold": "2025-02-15",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 6.103515625e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-15",
+      "seed": 11,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 6.103515625e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-15",
+      "seed": 29,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 6.103515619315658e-05
+    },
+    {
+      "model": "NHITS",
+      "fold": "2025-02-15",
+      "seed": 47,
+      "check": "CUDA_checkpoint_roundtrip_batch8_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 6.103515625e-05
+    },
+    {
+      "model": "Chronos_2_covariates",
+      "fold": "2025-01-25",
+      "check": "CUDA_native_batch32_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 1.525878903407829e-05
+    },
+    {
+      "model": "Chronos_2_covariates",
+      "fold": "2025-02-01",
+      "check": "CUDA_native_batch32_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.051757815342171e-05
+    },
+    {
+      "model": "Chronos_2_covariates",
+      "fold": "2025-02-08",
+      "check": "CUDA_native_batch32_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 3.0517578125e-05
+    },
+    {
+      "model": "Chronos_2_covariates",
+      "fold": "2025-02-15",
+      "check": "CUDA_native_batch32_vs64",
+      "n": 8,
+      "max_abs_difference_kWh": 7.62939453125e-05
+    }
+  ],
+  "largest_roundtrip_difference_kWh": 7.62939453125e-05
+}

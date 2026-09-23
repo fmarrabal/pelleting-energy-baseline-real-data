@@ -1,0 +1,62 @@
+{
+  "status": "GPU_RETRAINING_COMPLETE",
+  "preserved_cpu_files": 154,
+  "cpu_artifacts_unchanged": true,
+  "originals_and_frozen_final_unchanged": true,
+  "matched_targets": 584,
+  "matched_predictions": 4672,
+  "parent_protocol_sha256": "afa1e2599ad7195946faf4eb1c0f5da1fbfbbb8fcb5a095fc4a1f12e42171c6c",
+  "gpu_plan_sha256": "3076296f88d76021ef7f08bfdd2f59889b60e7c8e48b4e5049e566e471d75cea",
+  "selection_checked": 24,
+  "new_supervised_refits": 24,
+  "supervised_inner_fits": 24,
+  "foundation_fold_variants": 16,
+  "all_neural_execution_cuda_verified": true,
+  "completions": {
+    "supervised": {
+      "status": "COMPLETE",
+      "device": "cuda",
+      "device_name": "NVIDIA RTX PRO 5000 Blackwell",
+      "new_seed_refits": 24,
+      "wall_seconds_including_preparation": 532.4843763000099
+    },
+    "foundation": {
+      "status": "COMPLETE",
+      "device": "cuda",
+      "device_name": "NVIDIA RTX PRO 5000 Blackwell",
+      "new_fold_variants": 16,
+      "weights_finetuned": false,
+      "xreg_solver_device": "cpu",
+      "wall_seconds_including_preparation": 281.86174970003776
+    }
+  },
+  "peak_cuda_allocated_MiB": 914.7109375,
+  "frozen_foundation_prediction_max_difference_kWh": {
+    "TimesFM_2.5_covariates": 6.103515625e-05,
+    "TimesFM_2.5_univariate": 9.155273443184342e-05,
+    "Chronos_2_covariates": 57.041778564453125,
+    "Chronos_2_univariate": 0.00018310546875
+  },
+  "frozen_foundation_cross_device_equivalence_at_0_01kWh": {
+    "TimesFM_2.5_covariates": true,
+    "TimesFM_2.5_univariate": true,
+    "Chronos_2_covariates": false,
+    "Chronos_2_univariate": true
+  },
+  "chronos_normalization_diagnostic": {
+    "status": "POST_HOC_DIAGNOSTIC_NO_PRIMARY_CHANGES",
+    "use_arcsinh": true,
+    "native_prepared_channels_checked": 6424,
+    "categorical_encoding": "Official per-item target encoding, based only on completed context labels; same 16-query preprocessing batches as primary run.",
+    "constant_channels": 1097,
+    "constant_channels_context_difference_over_0_1": 694,
+    "nonconstant_channels_context_difference_over_0_1": 0,
+    "max_normalized_context_difference": 0.8813735842704773,
+    "max_normalized_future_difference": 0.8813735842704773,
+    "source_rule": "Native InstanceNorm substitutes eps only when scale equals exactly zero. Near-zero residual variance can amplify different CPU/GPU reductions.",
+    "interpretation": "This reproduces a normalization discrepancy on actual covariates. It is a mechanism consistent with the frozen-model prediction differences, not a completed end-to-end correction or a causal attribution of every residual.",
+    "primary_predictions_modified": false
+  },
+  "fundamental_scope": "Repetition on the same development sample; GPU/CPU training RNG trajectories can differ, and frozen-model numerical differences are reported separately. No new independent final test.",
+  "duration_note": "Measured operational times are not a controlled hardware speed benchmark; initial CPU jobs shared the CPU."
+}

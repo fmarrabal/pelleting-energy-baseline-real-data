@@ -1,0 +1,143 @@
+{
+  "rows": 2745,
+  "positive_targets": 2742,
+  "zero_targets": 3,
+  "missing_targets": 0,
+  "category_counts": {
+    "linea": {
+      "Pellet 2": 1148,
+      "Pellet 3": 867,
+      "Pellet 1": 730
+    },
+    "subfamilia": {
+      "SUBLINEA AVICULTURA ENGORDE": 797,
+      "SUBLINEA PORCICULTURA CEBA": 783,
+      "SUBLINEA PORCICULTURA CRIA": 359,
+      "SUBLINEA AVICULTURA POSTURA": 326,
+      "SUBLINEA GANADERIA LECHE": 238,
+      "SUBLINEA PORCICULTURA PREINICIADORES": 100,
+      "SUBLINEA GANADERIA CARNE": 61,
+      "SUBLINEA EQUINOS": 55,
+      "SUBLINEA OTROS CONEJOS": 26
+    },
+    "familia": {
+      "LINEA PORCICULTURA": 1242,
+      "LINEA AVICULTURA": 1123,
+      "LINEA GANADERIA": 299,
+      "LINEA EQUINOS": 55,
+      "LINEA OTROS": 26
+    },
+    "forma": {
+      "PELETIZADO": 2065,
+      "CROMBELIZADO": 680
+    },
+    "salida_programada": {
+      "ENSAQUE": 2420,
+      "GRANEL": 325
+    }
+  },
+  "numeric_summary": {
+    "masa_dosificada_t": {
+      "count": 2745.0,
+      "mean": 13.922139319672132,
+      "std": 5.728335724901494,
+      "min": 2.6935020000000005,
+      "25%": 10.794798,
+      "50%": 14.981291999999998,
+      "75%": 18.030132,
+      "max": 36.783189
+    },
+    "baches_dosificacion": {
+      "count": 2745.0,
+      "mean": 3.949726775956284,
+      "std": 1.539217917807371,
+      "min": 1.0,
+      "25%": 3.0,
+      "50%": 5.0,
+      "75%": 5.0,
+      "max": 10.0
+    },
+    "energia_peletizado_kWh": {
+      "count": 2745.0,
+      "mean": 258.1590151752115,
+      "std": 124.06592218443787,
+      "min": 0.0,
+      "25%": 179.1,
+      "50%": 251.1,
+      "75%": 320.40000000000003,
+      "max": 1075.5
+    }
+  },
+  "mass_batches_pearson": 0.9788169428816524,
+  "ridge": {
+    "encoded_features": 22,
+    "intercept_kWh": 288.09044396918114,
+    "max_archived_decomposition_error_kWh": 1.1368683772161603e-13,
+    "numeric_effects": [
+      {
+        "variable": "masa_dosificada_t",
+        "coefficient_per_training_sd_kWh": 73.90028035370551,
+        "training_mean": 14.116936961089493,
+        "training_sd": 5.555642123238558,
+        "coefficient_per_original_unit": 13.301843191912932
+      },
+      {
+        "variable": "baches_dosificacion",
+        "coefficient_per_training_sd_kWh": 14.230926266450922,
+        "training_mean": 4.020752269779507,
+        "training_sd": 1.4943334227402043,
+        "coefficient_per_original_unit": 9.523260371407101
+      },
+      {
+        "variable": "hora_sin",
+        "coefficient_per_training_sd_kWh": 0.19117958034459054,
+        "training_mean": -0.011369511682413706,
+        "training_sd": 0.709237308790826,
+        "coefficient_per_original_unit": 0.26955657573983427
+      },
+      {
+        "variable": "hora_cos",
+        "coefficient_per_training_sd_kWh": -0.04957752239401222,
+        "training_mean": 0.039107348202501696,
+        "training_sd": 0.7037924334204071,
+        "coefficient_per_original_unit": -0.07044338648693217
+      },
+      {
+        "variable": "dia_sin",
+        "coefficient_per_training_sd_kWh": -1.8094097573826957,
+        "training_mean": 0.10194462634782334,
+        "training_sd": 0.6747486600143827,
+        "coefficient_per_original_unit": -2.681605558644795
+      },
+      {
+        "variable": "dia_cos",
+        "coefficient_per_training_sd_kWh": -1.4543708279619314,
+        "training_mean": -0.09132034234749736,
+        "training_sd": 0.7252462575161168,
+        "coefficient_per_original_unit": -2.0053475807555086
+      }
+    ],
+    "negative_unclipped_count": 0,
+    "reference": "Standardized numerical means, all-zero categorical indicators; not a physical operation."
+  },
+  "example_window_target": {
+    "fila_fuente": 823,
+    "linea": "Pellet 1",
+    "subfamilia": "SUBLINEA GANADERIA CARNE",
+    "familia": "LINEA GANADERIA",
+    "forma": "PELETIZADO",
+    "salida_programada": "ENSAQUE",
+    "baches_dosificacion": 4,
+    "masa_dosificada_t": 10.819638,
+    "energia_peletizado_kWh": 148.5,
+    "inicio_registro": "2025-01-28 04:24:19.097000",
+    "inicio_peletizado": "2025-01-28 09:26:46.640000",
+    "fin_peletizado": "2025-01-28 11:04:53.453000",
+    "particion": "DESARROLLO"
+  },
+  "modern_records_by_machine": {
+    "Pellet 2": 257,
+    "Pellet 3": 178,
+    "Pellet 1": 149
+  }
+}

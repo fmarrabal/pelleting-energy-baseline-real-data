@@ -1,0 +1,12 @@
+research/
+downloads/
+release_assets/
+runs/
+.venv/
+__pycache__/
+*.pyc
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.blg
+latex/main.pdf
