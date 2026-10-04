@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this archive, cite the manuscript below and this versioned release."
-title: "Explainable energy baselines for industrial feed pelleting: a chronological comparison of regression, temporal and foundation models - reproducibility archive"
+title: "Explainable production-adjusted electrical-energy baselines for industrial feed pelleting - reproducibility archive"
 type: software
 authors:
   - family-names: "Sousa Santos"
@@ -24,7 +24,7 @@ url: "https://github.com/fmarrabal/pelleting-energy-baseline-real-data"
 repository-code: "https://github.com/fmarrabal/pelleting-energy-baseline-real-data"
 preferred-citation:
   type: article
-  title: "Explainable energy baselines for industrial feed pelleting: a chronological comparison of regression, temporal and foundation models"
+  title: "Explainable production-adjusted electrical-energy baselines for industrial feed pelleting"
   authors:
     - family-names: "Sousa Santos"
       given-names: "Vladimir"

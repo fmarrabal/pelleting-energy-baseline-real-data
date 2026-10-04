@@ -1,4 +1,4 @@
-# Explainable energy baselines for industrial feed pelleting: a chronological comparison of regression, temporal and foundation models
+# Explainable production-adjusted electrical-energy baselines for industrial feed pelleting
 
 **English** | [Español](README.es.md)
 

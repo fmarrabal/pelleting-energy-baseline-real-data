@@ -8,20 +8,20 @@
     "sha256": "9243ca1c87e038fd6384139912f745bfa01eae572c4b93521baa194f7fe0ecca"
   },
   "CITATION.cff": {
-    "bytes": 1949,
-    "sha256": "dc19e499275d1c6b2689c8b2f516f133b17a029cc984ed76510067260a6cb58b"
+    "bytes": 1863,
+    "sha256": "b35d094b2949dae214f435858e8932b474ef7b2e549d8f47eb5a71f0b646fb6d"
   },
   "package.json": {
-    "bytes": 2221,
-    "sha256": "45ffabd858d1144ab42e3baa5101203e28a83f761f37962740b4777b212ca157"
+    "bytes": 2178,
+    "sha256": "1cb403209548a152620ca7b8dcf97250011df860370fc73ef9391028f3745a55"
   },
   "README.es.md": {
-    "bytes": 20142,
-    "sha256": "39fb695677bdcd5d165034f5655d48d58a08c28e8579b08878e0db40710897dc"
+    "bytes": 20099,
+    "sha256": "8cd8b3465bf553c61858c87dfa5f6b9d5ccb5493cbdfa42772b72191c51ab0b2"
   },
   "README.md": {
-    "bytes": 18877,
-    "sha256": "93718cc8062ee5ce631922c7247cb79c0b193bc51fca6ceca18150edbf0e130c"
+    "bytes": 18834,
+    "sha256": "e31745d442baa9ac14483185d34667fc568af08bd4bcd78d44236106602eefd3"
   },
   "reproduce.py": {
     "bytes": 15506,

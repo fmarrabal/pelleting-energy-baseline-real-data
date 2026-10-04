@@ -1,7 +1,7 @@
 {
   "repo": "pelleting-energy-baseline-real-data",
   "pdf": "Paper_Peletizado_Datos_Reales_v4.pdf",
-  "title": "Explainable energy baselines for industrial feed pelleting: a chronological comparison of regression, temporal and foundation models",
+  "title": "Explainable production-adjusted electrical-energy baselines for industrial feed pelleting",
   "recipes": {
     "real-static": {
       "reset_folders": [
