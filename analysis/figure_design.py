@@ -22,7 +22,7 @@ def framework(d,test,save):
     frame(ax,.015,2.54,2.205,2.21,PALE)
     txt(ax,.14,4.59,'PRODUCTION RECORD',9,'bold',BLUE)
     for y,head,body in [(4.24,'Quantity','Dosed mass (t)\nDosing batch count'),
-                        (3.60,'Product and equipment','Machine and subfamily\nPresentation; bag / bulk'),
+                        (3.60,'Product and equipment','Pelleting line and subfamily\nPresentation; bag / bulk'),
                         (2.96,'Calendar','Origin hour and weekday')]:
         txt(ax,.14,y,head,9.7,'bold');txt(ax,.14,y-.20,body,9.2)
     arr(ax,(2.25,3.72),(2.73,3.72))
@@ -87,7 +87,7 @@ def allocation(d,C,save):
         ax.set_xticks(ticks)
         if j<2:ax.tick_params(axis='x',labelbottom=False,length=0)
         else:ax.set_xticklabels([f'{x:%d %b}' for x in ticks],fontsize=9)
-    fig.text(.11,.976,'a   Daily records by machine',fontsize=11,weight='bold',color=INK)
+    fig.text(.11,.976,'a   Daily records by pelleting line',fontsize=11,weight='bold',color=INK)
     ax=fig.add_subplot(gs[3]);ax.set(xlim=(0,1),ylim=(0,1));ax.axis('off')
     ax.text(0,.98,'b   Chronological allocation',fontsize=11,weight='bold',color=INK,va='top')
     for x,w,title,dates,ns,foot,fill in [

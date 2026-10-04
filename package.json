@@ -1,6 +1,6 @@
 {
   "repo": "pelleting-energy-baseline-real-data",
-  "pdf": "Paper_Peletizado_Datos_Reales_v3.pdf",
+  "pdf": "Paper_Peletizado_Datos_Reales_v4.pdf",
   "title": "Explainable energy baselines for industrial feed pelleting: a chronological comparison of regression, temporal and foundation models",
   "recipes": {
     "real-static": {
@@ -55,7 +55,7 @@
     }
   },
   "kind": "real",
-  "version": "v3-reproducibility",
+  "version": "v4-submission",
   "foundations": {
     "TimesFM_2.5": {
       "repo": "google/timesfm-2.5-200m-pytorch",

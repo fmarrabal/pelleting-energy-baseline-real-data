@@ -1,11 +1,7 @@
-Main document: main.tex
-Compiler: pdfLaTeX
-Bibliography: BibTeX (references.bib, elsarticle-num.bst)
-No shell escape or Python is required to compile the manuscript.
-Upload the dedicated Overleaf ZIP via New Project > Upload Project.
-The named paper PDF is the preserved reference. Compilation produces main.pdf.
+Main document: main.tex (compact preprint). main_review.tex = same manuscript with line numbers and double spacing.
+Compiler: pdfLaTeX. Bibliography: BibTeX (references.bib, elsarticle-num.bst). Class: elsarticle (bundled with TeX Live/MiKTeX/Overleaf).
+Overleaf: New Project > Upload Project with this ZIP; set main.tex as the main document.
+Paper_Peletizado_Datos_Reales_v4.pdf is the submitted manuscript as compiled on 2026-10-05.
 
-Documento principal: main.tex
-Compilador: pdfLaTeX. Bibliografia: BibTeX.
-Importa el ZIP de Overleaf mediante New Project > Upload Project.
-El PDF con el nombre del articulo es la referencia original; la compilacion produce main.pdf.
+Documento principal: main.tex (versión compacta); main_review.tex añade numeración de líneas y doble espacio.
+Compilador: pdfLaTeX; bibliografía: BibTeX. Importa el ZIP en Overleaf con New Project > Upload Project.

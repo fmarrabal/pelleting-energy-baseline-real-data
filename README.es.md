@@ -2,9 +2,13 @@
 
 [English](README.md) | **Español**
 
-Archivo de reproducción del manuscrito **Paper_Peletizado_Datos_Reales_v3.pdf**. Incluye los datos originales, código, resultados congelados y proyecto LaTeX/Overleaf.
+Archivo de reproducción del manuscrito **Paper_Peletizado_Datos_Reales_v4.pdf**. Incluye los datos originales, código, resultados congelados y proyecto LaTeX/Overleaf.
 
 Estudio complementario: [GitHub](https://github.com/fmarrabal/pelleting-energy-baselines-synthetic).
+
+## Actualización (5 de octubre de 2026): manuscrito v4 enviado a *Energy*
+
+`latex/` contiene ahora el **manuscrito v4**, *Explainable production-adjusted electrical-energy baselines for industrial feed pelleting*, la versión enviada a *Energy* (Elsevier): clase `elsarticle`, bloque de autores con afiliaciones y ORCID, highlights, nomenclatura, el texto y la estructura revisados por los coautores, una figura de flujo metodológico (`figures/13_DiagramaFlujoProced.pdf`, estática) y las declaraciones CRediT, de financiación, de conflicto de intereses, de disponibilidad de datos y de uso de IA. **Ningún experimento, cifra ni valor de tabla cambió** entre v3 y v4. Las figuras se regeneraron con `analysis/make_figures.py` tras sustituir la etiqueta "machine" por "pelleting line" (la terminología del manuscrito); `reproduce.py figures` las reproduce. `main_review.tex` compila el mismo manuscrito con numeración de líneas y doble espacio. El PDF compilado es `latex/Paper_Peletizado_Datos_Reales_v4.pdf`; el PDF v3 sustituido sigue disponible como asset de la release `v3-reproducibility`. Se eliminaron del árbol los duplicados PNG/SVG de las figuras, el ZIP de Overleaf y los scripts de construcción `src/paper_datos_reales_v1`–`v2`, ya superados; el ZIP de Overleaf se distribuye como asset de la release `v4-submission`.
 
 ## Pregunta científica y alcance
 
@@ -78,8 +82,7 @@ README.md / README.es.md      Guías completas en inglés y español
 reproduce.py                 Verificación, métricas, figuras, PDF y preparación de entrenamientos
 package.json                 Modelos, recetas y revisiones fundacionales inmutables
 analysis/                    Scripts de figuras y datos numéricos suficientes para reconstruirlas
-latex/                       main.tex, bibliografía, figuras, tablas/secciones y PDF original
-overleaf/                    ZIP listo para importar con main.tex en la raíz
+latex/                       main.tex, main_review.tex, bibliografía, figuras (PDF), secciones/tablas y PDF v4
 src/                         Copia literal del código científico original, para inspección en GitHub
 research/                    Datos originales, resultados, modelos y protocolos completos
 manifests/                   Inventarios por archivo y SHA-256 de los assets
@@ -146,7 +149,7 @@ TimesFM: `google/timesfm-2.5-200m-pytorch`, revisión `1d952420fba87f3c6dee4f240
 
 ## Overleaf y compilación local
 
-Descarga `overleaf/pelleting-energy-baseline-real-data-Overleaf.zip` o el asset homónimo de la release. En Overleaf usa **New Project → Upload Project**, selecciona el ZIP y establece **main.tex** como documento principal con **pdfLaTeX**. El ZIP incluye la bibliografía, su estilo, todas las figuras vectoriales empleadas, las tablas/secciones y el PDF de referencia con nombre distinto de `main.pdf`. No contiene Python, datos masivos ni rutas absolutas necesarias para compilar. No requiere shell escape. [Guía oficial de importación](https://docs.overleaf.com/managing-projects-and-files/uploading-a-project).
+Descarga el asset `pelleting-energy-baseline-real-data-Overleaf.zip` de la release `v4-submission`. En Overleaf usa **New Project → Upload Project**, selecciona el ZIP y establece **main.tex** como documento principal con **pdfLaTeX**. El ZIP incluye la bibliografía, su estilo, todas las figuras vectoriales empleadas, las tablas/secciones y el PDF de referencia con nombre distinto de `main.pdf`. No contiene Python, datos masivos ni rutas absolutas necesarias para compilar. No requiere shell escape. [Guía oficial de importación](https://docs.overleaf.com/managing-projects-and-files/uploading-a-project).
 
 También puedes compilar desde `latex/` con `pdflatex main.tex`, `bibtex main`, y dos pasadas más de `pdflatex main.tex`. Esas órdenes generan `main.pdf`; el PDF original con nombre largo permanece intacto. `reproduce.py paper` realiza las pasadas en una copia dentro de `runs/` y comprueba errores de referencias, citas, desbordamiento horizontal y número de páginas. Las fechas y metadatos de compilación pueden cambiar el hash de un PDF visualmente equivalente.
 
@@ -164,7 +167,7 @@ Si falta `pdflatex`, instala una distribución TeX o usa el ZIP de Overleaf. Si 
 
 ## Citación, derechos y contacto
 
-La ficha `CITATION.cff` identifica esta entrega del archivo de reproducción y su mantenedor de GitHub. El manuscrito suministrado no incorpora todavía autores ni DOI; no se inventan esos datos. Para citar resultados científicos, utiliza el título del manuscrito, la versión v3 y esta release, y actualiza la referencia cuando exista publicación/DOI. El acceso público no concede por sí mismo una licencia general de reutilización: véase `RIGHTS.md`. Los modelos, bibliotecas y archivos de terceros conservan sus propios términos. Usa Issues para comunicar problemas de reproducción, indicando versión, sistema operativo, receta y mensaje de error sin incluir credenciales. GitHub Actions permanece desactivado; los cálculos de esta entrega se verifican localmente.
+La ficha `CITATION.cff` identifica esta entrega del archivo de reproducción y a los autores del manuscrito (con ORCID cuando se dispone de él); el DOI se añadirá cuando exista. Para citar resultados científicos, utiliza el título del manuscrito, la versión v3 y esta release, y actualiza la referencia cuando exista publicación/DOI. El acceso público no concede por sí mismo una licencia general de reutilización: véase `RIGHTS.md`. Los modelos, bibliotecas y archivos de terceros conservan sus propios términos. Usa Issues para comunicar problemas de reproducción, indicando versión, sistema operativo, receta y mensaje de error sin incluir credenciales. GitHub Actions permanece desactivado; los cálculos de esta entrega se verifican localmente.
 
 
 ## Verificación de esta entrega (23 de septiembre de 2026)

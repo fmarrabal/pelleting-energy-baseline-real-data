@@ -57,7 +57,7 @@ for line,col in C.items():
     counts=g.baches_dosificacion.value_counts().reindex(range(1,11),fill_value=0)
     axes[1,1].plot(counts.index,100*counts/len(g),marker='o',ms=3.5,color=col,label=line)
 axes[1,0].set(title='(d) Dosed mass',xlabel='Dosed mass (t)',ylabel='Empirical cumulative fraction',ylim=(0,1.04));axes[1,0].legend(loc='lower right')
-axes[1,1].set(title='(e) Dosing batch count',xlabel='Recorded batches / operation',ylabel='Share within machine (%)',xticks=[1,3,5,7,10]);axes[1,1].grid(alpha=.15)
+axes[1,1].set(title='(e) Dosing batch count',xlabel='Recorded batches / operation',ylabel='Share within pelleting line (%)',xticks=[1,3,5,7,10]);axes[1,1].grid(alpha=.15)
 families=['LINEA AVICULTURA','LINEA PORCICULTURA','LINEA GANADERIA','LINEA EQUINOS','LINEA OTROS']
 fc=['#517FA4','#D89E57','#579B87','#9A82AF','#A9AFB6'];left=np.zeros(3)
 for fam,col,lab in zip(families,fc,['Poultry','Swine','Cattle','Equine','Other']):
@@ -91,13 +91,13 @@ ax.set(yticks=range(16),yticklabels=[f'{i+1:02d} | row {r.donor}' for i,r in enu
 ax.tick_params(axis='y',labelsize=8);ax.xaxis.set_major_locator(mdates.DayLocator());ax.xaxis.set_major_formatter(mdates.DateFormatter('%d %b'))
 ax.set_xlim(pd.Timestamp('2025-01-24 18:00'),(origin+pd.Timedelta(hours=24)).to_pydatetime());ax.set_ylim(-1,18)
 ax.text(mdates.date2num(origin)+.08,11,'Target origin\n28 Jan 04:24\n\nEnergy becomes\navailable no earlier\nthan 28 Jan 11:04',fontsize=8.5,va='center',color=red)
-ax.text(mdates.date2num(pd.Timestamp('2025-01-25 03:00')),16.6,'Same machine; all donor outcomes completed before the origin',fontsize=8.5,color=dark)
+ax.text(mdates.date2num(pd.Timestamp('2025-01-25 03:00')),16.6,'Same pelleting line; all donor outcomes completed before the origin',fontsize=8.5,color=dark)
 save(fig,'07_windows',{'target_source_row':823,'donors':w.donor.tolist(),'actual_timestamps':True,'context':16,'horizon_records':1})
 
 # Original development and exploratory contrasts (same records).
 fig,aa=plt.subplots(2,2,figsize=(8.2,7.6),layout='constrained',width_ratios=[1.15,1])
 axes=aa[0]
-names={'Ridge':'Ridge','HistGradientBoosting':'Gradient boosting','ExtraTrees':'ExtraTrees','MLP_3_semillas':'MLP (3-seed mean)','SEC_maquina':'Machine SEC','SEC_ultimos5':'Recent SEC (5)','Mediana_maquina':'Machine median'}
+names={'Ridge':'Ridge','HistGradientBoosting':'Gradient boosting','ExtraTrees':'ExtraTrees','MLP_3_semillas':'MLP (3-seed mean)','SEC_maquina':'Line-specific SEC','SEC_ultimos5':'Recent SEC (5)','Mediana_maquina':'Line-specific median'}
 m=pd.read_csv(D/'modelos_desarrollo.csv').sort_values('MAE_kWh')
 axes[0].barh([names[n] for n in m.modelo],m.MAE_kWh,color=[dark if n=='Ridge' else '#94ABBD' for n in m.modelo])
 for j,r in enumerate(m.itertuples()):axes[0].text(r.MAE_kWh+1,j,f'{r.MAE_kWh:.2f}',va='center',fontsize=8.5)
@@ -109,10 +109,10 @@ for j,r in enumerate(h.itertuples()):
     axes[1].scatter(r.reduccion_MAE,j,color=dark,s=30,zorder=4)
     axes[1].text(r.reduccion_MAE,j-.16,f'{r.reduccion_MAE:.3f}',ha='center',fontsize=9)
 axes[1].axvline(0,color=grey,ls='--',lw=.9)
-axes[1].set(yticks=range(3),yticklabels=['H1: mass x machine','H2: mass x subfamily','H3: recent residuals'],ylim=(3,-.6),xlim=(-.5,3.65),xlabel='Paired MAE reduction (kWh)',title='(b) Exploratory MAE reductions')
+axes[1].set(yticks=range(3),yticklabels=['H1: mass x pelleting line','H2: mass x subfamily','H3: recent residuals'],ylim=(3,-.6),xlim=(-.5,3.65),xlabel='Paired MAE reduction (kWh)',title='(b) Exploratory MAE reductions')
 stamp(axes[1],'Dark: 95%; light: 98.33% intervals\n5,000 resamples of 3 observed dates\nPositive values favour the update',(.02,.22),8)
 hp=pd.read_csv(D/'hipotesis_predicciones.csv')
-for ax,key,title in [(aa[1,0],'linea','(c) Reduction by machine'),(aa[1,1],'fold','(d) Reduction by validation week')]:
+for ax,key,title in [(aa[1,0],'linea','(c) Reduction by pelleting line'),(aa[1,1],'fold','(d) Reduction by validation week')]:
     means=hp.groupby(['modelo',key])['abs'].mean().unstack(key)
     counts=hp[hp.modelo.eq('Ridge')].groupby(key).size()
     positions=np.arange(len(means.columns))
@@ -123,7 +123,7 @@ for ax,key,title in [(aa[1,0],'linea','(c) Reduction by machine'),(aa[1,1],'fold
     ax.set(title=title,ylabel='MAE reduction (kWh)',ylim=(-1.2,5.1))
     ax.axhline(0,ls='--',color=grey,lw=.8);ax.grid(axis='y',alpha=.15)
     ax.legend(ncols=3,loc='upper left',fontsize=8)
-save(fig,'03_development_and_hypotheses',{'records_per_method':800,'methods':7,'hypotheses':3,'archived_intervals':True,'new_panels':'machine and week MAE differences recalculated from unchanged archived predictions'})
+save(fig,'03_development_and_hypotheses',{'records_per_method':800,'methods':7,'hypotheses':3,'archived_intervals':True,'new_panels':'pelleting-line and week MAE differences recalculated from unchanged archived predictions'})
 
 # GPU comparison: all methods; CI of differences and fold/line detail.
 ORDER=['Ridge_actual','TFT','Ridge_ventana','NHITS','Chronos_2_covariates','TimesFM_2.5_univariate','Chronos_2_univariate','TimesFM_2.5_covariates']
@@ -147,7 +147,7 @@ for ax in axes:ax.grid(axis='x',alpha=.17)
 save(fig,'08_gpu_comparison',{'records':584,'methods':8,'resamples':5000,'unit':'kWh per record','all_intervals_full_range':True})
 
 fig,axes=plt.subplots(1,2,figsize=(8.2,5.8),layout='constrained',width_ratios=[1.16,1])
-for ax,filename,key,title in [(axes[0],'metrics_by_fold.csv','fold','(a) Validation week'),(axes[1],'metrics_by_machine.csv','linea','(b) Machine')]:
+for ax,filename,key,title in [(axes[0],'metrics_by_fold.csv','fold','(a) Validation week'),(axes[1],'metrics_by_machine.csv','linea','(b) Pelleting line')]:
     q=pd.read_csv(D/'gpu'/filename);pivot=q.pivot(index='modelo',columns=key,values='MAE_kWh').loc[ORDER]
     im=ax.imshow(pivot,vmin=35,vmax=130,cmap='YlGnBu',aspect='auto')
     cols=list(pivot.columns);counts=q[q.modelo=='Ridge_actual'].set_index(key).n
@@ -189,14 +189,15 @@ cat=cf.iloc[6:].copy();labs=['P1','P2','P3','Poultry: broiler','Poultry: layer',
 axes[0,1].barh(labs,cat.coefficient_kWh,color=['#407F9B' if x>=0 else '#C77C63' for x in cat.coefficient_kWh]);axes[0,1].invert_yaxis()
 axes[0,1].axvline(0,color=grey,lw=.7);axes[0,1].set(xlim=(-65,80),xlabel='One-hot coefficient (kWh)',title='(b) Categorical coefficients');axes[0,1].tick_params(axis='y',labelsize=8)
 groups=['Dosed mass','Dosing batches','Hour','Weekday','Machine','Product subfamily','Presentation','Bag / bulk']
+shown=[g if g!='Machine' else 'Pelleting line' for g in groups]  # archived column keys keep 'Machine'; display uses 'Pelleting line'
 rng=np.random.default_rng(20260922)
 for j,col in enumerate(groups):
     vals=parts[col].to_numpy();axes[1,0].scatter(vals,j+rng.uniform(-.15,.15,len(vals)),s=2,alpha=.12,color=dark)
     q=np.quantile(vals,[.25,.5,.75]);axes[1,0].plot([q[0],q[2]],[j,j],color='#C77C19',lw=3);axes[1,0].scatter(q[1],j,color=red,s=12,zorder=3)
-axes[1,0].set(yticks=range(8),yticklabels=groups,ylim=(7.6,-.6),xlabel='Contribution to the estimate (kWh)',title='(c) Contributions across 798 records');axes[1,0].axvline(0,color=grey,lw=.7)
+axes[1,0].set(yticks=range(8),yticklabels=shown,ylim=(7.6,-.6),xlabel='Contribution to the estimate (kWh)',title='(c) Contributions across 798 records');axes[1,0].axvline(0,color=grey,lw=.7)
 # Choose deterministically by observed energy nearest the test median, tie by row ID.
 row=parts.assign(dist=abs(parts.observed_kWh-parts.observed_kWh.median())).sort_values(['dist','fila_fuente']).iloc[0]
-vals=[row.intercept_kWh]+[row[g] for g in groups];labels=['Intercept']+groups
+vals=[row.intercept_kWh]+[row[g] for g in groups];labels=['Intercept']+shown
 axes[1,1].barh(labels,vals,color=[grey]+['#407F9B' if x>=0 else '#C77C63' for x in vals[1:]])
 axes[1,1].invert_yaxis();axes[1,1].set(xlabel='Additive term (kWh)',title=f'(d) Worked example: row {int(row.fila_fuente)}')
 for j,val in enumerate(vals):axes[1,1].text(max(val,0)+3,j,f'{val:.1f}',va='center',fontsize=8)
@@ -213,7 +214,7 @@ for j,(line,col) in enumerate(C.items()):
     ax.set(xlim=(0,1150),ylim=(0,1150),xlabel='Observed energy (kWh)',ylabel='Frozen estimate (kWh)' if j==0 else '',title=f'({chr(97+j)}) {line}: n = {len(g)}')
     stamp(ax,f'MAE {e.abs().mean():.2f}\nRMSE {np.sqrt(np.mean(e**2)):.2f}\nBias {e.mean():.2f} kWh',size=8.5)
     ax=axes[1,j];ax.scatter(g.inicio_registro,e,s=12,alpha=.62,color=col,linewidths=0);ax.axhline(0,ls='--',color=grey,lw=.8)
-    ax.axhline(e.mean(),color=red,lw=1,label='Machine mean error')
+    ax.axhline(e.mean(),color=red,lw=1,label='Pelleting-line mean error')
     ax.set(ylim=(min(errors.min()*1.1,-10),max(errors.max()*1.15,10)),xlabel='Origin date in 2025',ylabel='Estimate - observed (kWh)' if j==0 else '',title=f'({chr(100+j)}) Signed errors over time');dateaxis(ax,2)
     if j==0:ax.legend(loc='lower left',fontsize=8)
 save(fig,'04_original_test_scatter',{'all_test_records':798,'shared_axis_full_range':True,'test_reused_for_selection':False})
@@ -226,7 +227,7 @@ for j,(ax,(line,col)) in enumerate(zip(axes,C.items())):
     ax.vlines(x,g.L95,g.U95,color=col,alpha=.28,lw=.75,label='Fixed 95% interval')
     ax.scatter(x,g.Ridge,s=7,color=col,alpha=.8,label='Ridge estimate');ax.scatter(x,g.energia_peletizado_kWh,s=9,color='#30343A',alpha=.65,label='Observed')
     ax.scatter(x[outside],g.loc[outside,'energia_peletizado_kWh'],s=27,facecolor='none',edgecolor=red,lw=.8,label='Outside interval')
-    ax.set(title=f'({chr(97+j)}) {line}: n = {len(g)}; 95% coverage {100*(1-outside.mean()):.1f}%',xlabel='Record order within machine (irregular events)',ylabel='Pelleting energy (kWh)',xlim=(-1,len(g)+2),ylim=(-15,1220))
+    ax.set(title=f'({chr(97+j)}) {line}: n = {len(g)}; 95% coverage {100*(1-outside.mean()):.1f}%',xlabel='Record order within pelleting line (irregular events)',ylabel='Pelleting energy (kWh)',xlim=(-1,len(g)+2),ylim=(-15,1220))
     ax.grid(axis='y',alpha=.15);ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 axes[0].legend(ncols=4,loc='upper left',fontsize=8)
 save(fig,'05_all_test_records',{'records':798,'bounds':1596,'individual_intervals_not_continuous_band':True,'outside_95':54})

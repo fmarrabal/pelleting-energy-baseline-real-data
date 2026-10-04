@@ -7,8 +7,14 @@
   },
   "overleaf": {
     "name": "pelleting-energy-baseline-real-data-Overleaf.zip",
-    "bytes": 1878950,
-    "sha256": "feba9acfe786d1e123f375a48b435da7b07ea719e7b9073fb557ae40f1229d00",
-    "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v3-reproducibility/pelleting-energy-baseline-real-data-Overleaf.zip"
+    "bytes": 1764031,
+    "sha256": "a395ead76cd2a8042df0a84d2979ba2677558941210201bc88a8004f880de832",
+    "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v4-submission/pelleting-energy-baseline-real-data-Overleaf.zip"
+  },
+  "paper_pdf": {
+    "name": "Paper_Peletizado_Datos_Reales_v4.pdf",
+    "bytes": 1047513,
+    "sha256": "cb43c97ffa70eb2e32007bb2d087a683ac40aedd1e7a32c2ed97e1ac9ee76fe4",
+    "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v4-submission/Paper_Peletizado_Datos_Reales_v4.pdf"
   }
 }

@@ -1,51 +1,60 @@
-\documentclass[11pt,a4paper]{article}
+% Explainable production-adjusted electrical-energy baselines for industrial feed pelleting -- manuscript for Energy (Elsevier)
+% Compile: pdflatex -> bibtex -> pdflatex -> pdflatex  (or latexmk -pdf main.tex)
+% main_review.tex produces the Editorial Manager version (line numbers, double spacing).
+\documentclass[preprint,12pt]{elsarticle}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{newtxtext,newtxmath}
-\usepackage[margin=23mm,headheight=14pt]{geometry}
 \usepackage{amsmath,mathtools,graphicx,booktabs,tabularx,array}
-\usepackage[font=small,labelfont=bf]{caption}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage{microtype,xcolor,fancyhdr,placeins}
+\usepackage{microtype,xcolor,placeins}
 \usepackage[hyphens]{url}
-\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!45!black,pdfauthor={},pdftitle={Explainable energy baselines for industrial feed pelleting}]{hyperref}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!45!black,pdftitle={Explainable production-adjusted electrical-energy baselines for industrial feed pelleting},pdfauthor={Sousa Santos, Cabello Eras, Herrera Rodino, Arrabal-Campos}]{hyperref}
+\usepackage{orcidlink}
+\ifdefined\withlinenumbers\usepackage[mathlines]{lineno}\fi % set by main_review.tex
 \urlstyle{same}
-\setlength{\parindent}{1.2em}\setlength{\parskip}{2pt}
 \setlength{\emergencystretch}{2em}
-\setlength{\textfloatsep}{14pt plus 2pt minus 2pt}
 \renewcommand{\topfraction}{.9}\renewcommand{\bottomfraction}{.8}
 \renewcommand{\textfraction}{.08}\renewcommand{\floatpagefraction}{.75}
-\setcounter{topnumber}{3}\setcounter{bottomnumber}{2}
-\pagestyle{fancy}\fancyhf{}
-\fancyhead[L]{\small Energy baselines for industrial feed pelleting}
-\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{.3pt}
 \newcommand{\ind}{\mathbf{1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \newcommand{\fig}[4]{\begin{figure}[!htbp]\centering\includegraphics[width=#3\linewidth]{figures/#1.pdf}\caption{#4}\label{fig:#2}\end{figure}}
-\title{\vspace{-1.5em}\bfseries Explainable energy baselines for industrial feed pelleting:\\a chronological comparison of regression, temporal and foundation models}
-\author{}\date{}
-\begin{document}
-\maketitle\vspace{-2.8em}\thispagestyle{plain}
-\begin{abstract}
-Assessing electricity use in feed pelleting requires a baseline that accounts for what each production line processes. We studied 2,745 real operational records from three lines, using dosed mass, batch count, product and machine characteristics, and calendar information to estimate pelleting electricity in kWh per record. Seven methods were first compared on 800 chronological development records. The selected Ridge baseline reduced mean absolute error from 61.29 to 52.45 kWh in a subsequent 798-record test, a 14.42\% improvement over machine-specific energy intensity. We then examined whether completed operating histories added predictive value. On 584 matched development targets with 16-record contexts, GPU-trained Temporal Fusion Transformer achieved MAE 53.65 kWh, compared with 53.55 kWh for the corresponding Ridge control. The paired confidence interval did not establish an improvement; N-HiTS and the tested TimesFM 2.5 and Chronos-2 variants also performed worse than the control. Ridge's additive structure made individual estimates directly interpretable, although substantial underestimation remained on Pellet~1. Fixed 90\% and 95\% intervals covered 85.96\% and 93.23\% of test records. Updating calibration increased coverage mainly by widening the intervals. These findings support a transparent production-adjusted baseline for retrospective assessment. Prospective forecasting will require confirmation of input availability and measurement boundaries, followed by evaluation on a new industrial period.
-\end{abstract}
-\noindent\textbf{Keywords:} feed pelleting; electrical energy; production-adjusted baseline; temporal models; explainable regression; prediction intervals.
+\journal{Energy}
 
+\begin{document}
+\ifdefined\withlinenumbers\linenumbers\fi
+\begin{frontmatter}
+\title{Explainable production-adjusted electrical-energy baselines for industrial feed pelleting}
+
+\input{sections/authors}
+
+\begin{abstract}
+Electricity use in industrial feed pelleting varies with the quantity produced, the product, the pelleting line and the batch organization, so neither raw consumption nor a single specific energy consumption (SEC) figure says much about energy performance. This retrospective study developed and chronologically evaluated an explainable, production-adjusted electricity baseline and asked whether histories of completed operations improve it. The data are 2,745 records from three pelleting lines, 2,742 with positive recorded energy; the inputs are dosed mass, dosing-batch count, product characteristics, pelleting-line identity and calendar variables. Seven methods were compared on 800 chronologically ordered development targets; the selected Ridge regression was then frozen and evaluated against line-specific SEC on 798 later records. Eight current-input, history-enabled, temporal and pretrained configurations were also compared on 584 matched targets with 16 completed same-line operations as context. Ridge reduced test MAE from 61.29 to 52.45~kWh, 14.42\% below line-specific SEC; this is lower prediction error, not an energy saving. On the matched population the Temporal Fusion Transformer reached 53.65~kWh against 53.55~kWh for current-input Ridge, with no evidence of paired improvement, and the tested N-HiTS, TimesFM~2.5 and Chronos-2 configurations were less accurate. Performance was most consistent on Pellet~2 and Pellet~3; Pellet~1 also improved over SEC but remained systematically underestimated. Fixed 90\% and 95\% residual intervals covered 85.96\% and 93.23\% of the test records. Ridge provides a transparent retrospective baseline; prospective use requires verified inputs and measurement boundaries, line-specific acceptance criteria and validation on a new consecutive period.
+\end{abstract}
+
+\begin{highlights}
+\item Production-adjusted electricity baseline from 2,745 real feed-pelleting records
+\item Frozen Ridge model cuts test MAE by 14.42\% relative to line-specific SEC
+\item Completed same-line histories, TFT, N-HiTS, TimesFM 2.5 and Chronos-2 add no accuracy
+\item Exact additive decomposition traces each kWh estimate to recorded production inputs
+\item Fixed 90\%/95\% residual intervals cover 85.96\% and 93.23\% of later test records
+\end{highlights}
+
+\begin{keyword}
+feed pelleting \sep industrial energy baseline \sep production adjustment \sep chronological validation \sep prediction intervals \sep explainable Ridge regression
+\end{keyword}
+\end{frontmatter}
+
+\input{sections/nomenclature}
 \input{sections/introduction}
 \input{sections/methods}
 \input{sections/results}
 \input{sections/discussion}
-
-\begin{samepage}
-\section{Conclusions}
-A Ridge model accounting for production conditions reduced prediction error by 14.42\% against a machine-specific energy-intensity reference in the original chronological test. Its transparent structure made the estimated contribution of each input accessible, while the residuals revealed persistent differences between machines. The subsequent comparison on matched 16-record histories did not establish an advantage for TFT, N-HiTS or the tested TimesFM 2.5 and Chronos-2 variants. Product-dependent mass effects and recent-residual correction offered modest exploratory improvements, whereas updated uncertainty calibration mainly produced wider intervals. The frozen Ridge model therefore remains a useful reference for retrospective energy assessment and for a future digital-twin interface. Its operational value now depends on establishing when inputs and outcomes become available and testing the selected policies on a new industrial period.
-
-\end{samepage}
-\section*{Data and reproducibility}
-The accompanying material contains the variable dictionary, source-row identifiers, archived predictions, model configurations and code used to reproduce the figures. Source data, models and prediction tables are linked by retained fingerprints. All figures use the recorded data and saved experimental outputs. Industrial data have not been publicly released; access and redistribution require agreement with the data owner.
-
+\input{sections/conclusions}
+\input{sections/declarations}
 \input{sections/appendix}
 \FloatBarrier
+\input{sections/ai_declaration}
+
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
 \end{document}

@@ -1,65 +1,114 @@
-\section{Results}
-\subsection{Production patterns and the baseline comparison}
-Electricity use varied widely within each machine, alongside differences in dosed mass and product allocation (Figure~\ref{fig:production}). The scatter of individual records shows why neither an average total consumption nor a single intensity value can fully describe this production setting. Differences between machine-level distributions also reflect differences in what the machines processed. They cannot be read directly as differences in mechanical efficiency.
+\section{Results}\label{sec:results}
+\subsection{Production variability across lines and periods}
+Figure~\ref{fig:production} summarizes production and electricity on the three lines: panels (a)--(c) contain the 2,742 records with positive pelleting energy, and panels (d)--(f) describe the mass, dosing-batch and product-family distributions of all 2,745 source records. Electricity generally rises with dosed mass, yet records of similar mass remain widely dispersed, and the distributions of mass, batch count and product family differ among lines and chronological partitions. Both observations argue for a production-adjusted baseline rather than a single plant-wide intensity value. Line-level differences in absolute or specific consumption must be read together with the corresponding production allocation; they are not controlled comparisons and say nothing about intrinsic mechanical efficiency.
 
-\fig{02_production_and_energy}{production}{1}{Production and electricity across the three machines. (a--c) Dosed mass and pelleting electricity for all 2,742 positive-energy records, with machine-specific medians annotated. (d--f) Mass distributions, dosing-batch frequencies and product-family mix for all 2,745 source records, including the three zero-energy records. Printed values inside the product bars are record counts. Scatter points represent individual operations, without an implied uniform time spacing.}
+\fig{02_production_and_energy}{production}{1}{Production and electricity across pelleting lines. (a--c) Dosed mass and pelleting electricity for the 2,742 positive-energy records, with line-specific medians annotated. (d--f) Mass distributions, dosing-batch frequencies and product-family mix of all 2,745 source records; values inside the product bars are record counts. Points are individual operations and are not uniformly spaced in time.}
 
-In the original comparison on 800 development records, Ridge and histogram gradient boosting gave nearly identical MAE: 51.48 and 51.50 kWh, respectively (Table~\ref{tab:development}). ExtraTrees was close behind, while the multilayer perceptron and the three reference estimators had larger errors. The recent-intensity estimator was less accurate than the training-period intensity reference, despite using completed observations from the validation weeks. Recent information was therefore useful only if incorporated in a suitable way; recency alone did not provide a better baseline.
+\subsection{Baseline selection and frozen chronological test}
+Table~\ref{tab:development} gives the development results of the seven candidates on the same 800 records. Ridge and histogram gradient boosting were practically tied at 51.48 and 51.50~kWh MAE, with ExtraTrees close behind at 52.31~kWh; the MLP and the three references had larger errors, and the recent-SEC estimator, although updated with completed validation outcomes, did worse than the static line-specific SEC. Ridge was selected for comparable accuracy, lower structural complexity and the availability of an exact additive decomposition, not because it was shown to be more accurate than gradient boosting.
 
-\input{sections/table_development}
+\begin{table}[!htbp]\centering\small\setlength{\tabcolsep}{5pt}
+\caption{Chronological development performance on the same 800 records. The recent-SEC estimator was updated as completed outcomes became available during validation; all other models kept fixed parameters within each validation block.}\label{tab:development}
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Method & MAE (kWh) & RMSE (kWh) & Bias (kWh) & WAPE (\%) \\\midrule
+Ridge & 51.48 & 72.31 & $-3.14$ & 19.88 \\
+Gradient boosting & 51.50 & 73.46 & $-5.72$ & 19.88 \\
+ExtraTrees & 52.31 & 75.37 & $-4.89$ & 20.20 \\
+MLP, three-seed mean & 56.64 & 81.36 & $-1.47$ & 21.87 \\
+Line-specific SEC & 59.69 & 83.92 & $-6.59$ & 23.05 \\
+Recent SEC, last five records & 73.51 & 109.55 & 4.29 & 28.38 \\
+Line-specific median & 82.61 & 112.78 & $-14.09$ & 31.89 \\\bottomrule
+\end{tabular}
+\end{table}
 
-Ridge was retained for its accuracy and transparent structure, then fitted on the 1,542 eligible development records. On the subsequent 798-record test, it reduced MAE from 61.29 kWh for the machine-specific intensity reference to 52.45 kWh, an improvement of 8.84 kWh or 14.42\% (Table~\ref{tab:test}). The paired 95\% block-bootstrap interval for the MAE reduction was [6.08, 11.50] kWh. RMSE also decreased, from 92.05 to 80.42 kWh. Removing the five test records with durations exceeding 24 hours left MAE at 52.32 kWh for Ridge and 61.15 kWh for the reference, so those records did not account for the overall advantage.
+The selected specification was fitted on the 1,542 eligible development records and frozen before the 798-record chronological test. Ridge reduced test MAE from 61.29 to 52.45~kWh (Table~\ref{tab:test}), a paired reduction of 8.84~kWh per record or 14.42\% with a 95\% block-bootstrap interval of [6.08, 11.50]~kWh; RMSE fell from 92.05 to 80.42~kWh and global WAPE from 22.34\% to 19.11\%. These percentages are reductions in prediction error, not in plant electricity consumption. Removing the five test records longer than 24 hours gave 52.32~kWh for Ridge and 61.15~kWh for SEC, so those records do not explain the advantage.
 
-The improvement occurred on all three machines, but their remaining errors were uneven. Pellet~2 had the lowest Ridge MAE, at 43.36 kWh, compared with 53.36 kWh for Pellet~3 and 66.37 kWh for Pellet~1. Pellet~1 also had a mean prediction error of $-53.85$ kWh, indicating substantial underestimation. The observed-versus-predicted plots make this visible: many of its high-consumption records lie below the equality line (Figure~\ref{fig:testscatter}). Thus, the global improvement coexists with a machine-specific limitation that matters for operational use.
+\begin{table}[!htbp]\centering\small
+\caption{Frozen chronological test performance overall and by pelleting line. Global WAPE is 19.11\% for Ridge and 22.34\% for line-specific SEC.}\label{tab:test}
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Population & Method & $N$ & MAE (kWh) & RMSE (kWh) & Bias (kWh) \\\midrule
+All lines & Ridge & 798 & 52.45 & 80.42 & $-21.89$ \\
+All lines & Line-specific SEC & 798 & 61.29 & 92.05 & $-24.57$ \\\addlinespace
+Pellet~1 & Ridge & 200 & 66.37 & 105.14 & $-53.85$ \\
+Pellet~1 & Line-specific SEC & 200 & 72.31 & 113.90 & $-64.03$ \\
+Pellet~2 & Ridge & 333 & 43.36 & 61.26 & $-10.85$ \\
+Pellet~2 & Line-specific SEC & 333 & 49.29 & 73.24 & $-8.66$ \\
+Pellet~3 & Ridge & 265 & 53.36 & 80.10 & $-11.63$ \\
+Pellet~3 & Line-specific SEC & 265 & 68.05 & 94.79 & $-14.79$ \\\bottomrule
+\end{tabular}
+\end{table}
 
-\input{sections/table_test}
+The production-adjusted model had lower MAE than SEC on every line (Figure~\ref{fig:testscatter}). Performance was most consistent on Pellet~2 and Pellet~3, with Ridge MAE of 43.36 and 53.36~kWh. Pellet~1 also benefited, its MAE falling from 72.31 to 66.37~kWh and its bias from $-64.03$ to $-53.85$~kWh, but the remaining systematic underestimation means that the frozen model was not operationally calibrated for that line during the test period. This localized shortfall does not invalidate the baseline or the gains on the other lines; it does mean that a common alerting criterion should not be applied across lines without line-specific calibration and chronological validation.
 
-\fig{04_original_test_scatter}{testscatter}{1}{Frozen Ridge predictions and errors for every record in the original chronological test. (a--c) Observed versus predicted electricity on identical axes, with equality dashed and MAE, RMSE and bias reported in kWh. (d--f) Signed errors by origin date, with zero dashed and each machine's mean error in red. The 200 Pellet~1, 333 Pellet~2 and 265 Pellet~3 records account for all 798 test observations. The residual axes preserve the full error range.}
+\fig{04_original_test_scatter}{testscatter}{1}{Frozen Ridge performance in the chronological test. (a--c) Observed versus predicted electricity on identical axes, with the equality line dashed and MAE, RMSE and bias in kWh. (d--f) Signed errors in chronological order within each line, with zero dashed and the mean signed error of each line in red. The 200, 333 and 265 records of Pellet~1, 2 and 3 make up all 798 test observations.}
 
 \FloatBarrier
-\subsection{Temporal models on matched records}
-The temporal benchmark asks a narrower question: whether 16 completed same-machine records improve the estimate for the next eligible event. Its history rule leaves 584 shared development targets. On this population, the current-input Ridge control achieved MAE 53.55 kWh, while TFT achieved 53.65 kWh (Table~\ref{tab:gpu}). The paired reduction relative to Ridge was $-0.105$ kWh, with a 95\% interval of [$-2.199$, 2.318] kWh. The interval includes advantages in either direction, and provides no evidence of an improvement from TFT. Adding the full history to Ridge increased MAE to 63.95 kWh; N-HiTS reached 65.28 kWh. These results concern matched event histories and should be interpreted separately from the original 800-record comparison.
+\subsection{Predictive value of completed operating histories}
+The short-context comparison uses the 584 development records for which 16 completed same-line operations were available within the weekly interval; the other 216 of the original 800 did not meet the requirement, so these results apply to the matched population and are not comparable with the 800-record ranking. Table~\ref{tab:gpu} separates the Ridge controls, the locally trained temporal models and the frozen pretrained models.
 
-\input{sections/table_gpu}
+\begin{table}[!htbp]\centering\small\setlength{\tabcolsep}{4.5pt}
+\caption{Short-context model performance on the 584 matched development records. TFT and N-HiTS are three-seed prediction means; foundation-model weights remain frozen.}\label{tab:gpu}
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Model group & Method & MAE & RMSE & Bias & WAPE (\%) \\\midrule
+Ridge controls & Current inputs & 53.55 & 77.01 & $-4.72$ & 20.37 \\
+ & Full 16-record window & 63.95 & 85.95 & $-1.42$ & 24.32 \\\addlinespace
+Local temporal & TFT & 53.65 & 79.11 & $-11.23$ & 20.41 \\
+ & N-HiTS & 65.28 & 92.56 & $-3.05$ & 24.83 \\\addlinespace
+Frozen pretrained & Chronos-2 + covariates & 85.53 & 120.82 & $-8.11$ & 32.53 \\
+ & TimesFM 2.5, energy only & 96.40 & 130.72 & $-9.22$ & 36.67 \\
+ & Chronos-2, energy only & 100.02 & 136.47 & $-11.60$ & 38.04 \\
+ & TimesFM 2.5 + XReg & 112.12 & 644.61 & 28.03 & 42.65 \\\bottomrule
+\end{tabular}\par\vspace{4pt}\footnotesize MAE, RMSE and bias are in kWh per record.
+\end{table}
 
-\fig{08_gpu_comparison}{gpucomparison}{1}{Accuracy and paired differences on the 584 shared development targets. (a) MAE with 95\% block-bootstrap intervals. (b) Reduction in MAE relative to current-input Ridge, so positive values favour the alternative. Pale intervals allow for seven comparisons; dark intervals are unadjusted 95\% intervals. The full interval endpoints are retained, including the wide TimesFM XReg interval. Resampling uses blocks of three observed origin dates.}
+Current-input Ridge reached 53.55~kWh MAE and TFT 53.65~kWh. The paired difference (Ridge minus TFT) was $-0.11$~kWh with a 95\% interval of [$-2.20$, 2.32]~kWh, which includes effects in both directions and gives no support for an improvement from TFT in the tested configuration. Giving Ridge the full 16-record history raised its MAE to 63.95~kWh, and N-HiTS reached 65.28~kWh. Chronos-2 did better with covariates than with energy alone, but both versions stayed well above the Ridge control, as did the energy-only TimesFM variant (Figure~\ref{fig:gpucomparison}).
 
-Chronos-2 benefited from the production covariates compared with its energy-only version, although its MAE of 85.53 kWh remained above the matched Ridge control. The TimesFM XReg variant had both the highest MAE and a particularly large RMSE. Three Pellet~3 records in the first validation week received predictions of approximately 2,753, 9,239 and 12,203 kWh, against observed values of 185.4, 142.4 and 70.9 kWh. In each local 16-record context, dosed mass was almost constant; the current mass lay about 1,100--1,467 historical standard deviations from the local mean. An independent float64 reconstruction closely reproduced the adapter's extreme extrapolation. All three records remain in the reported metrics.
+\fig{08_gpu_comparison}{gpucomparison}{1}{Short-context comparison on the 584 matched development records. (a) MAE with 95\% block-bootstrap intervals. (b) Paired MAE reduction relative to current-input Ridge, so positive values favour the alternative; pale intervals are adjusted for seven comparisons and dark intervals are unadjusted 95\% intervals. The wide TimesFM XReg interval is shown in full.}
 
-This behavior helps explain the large gap between MAE and RMSE for that variant. It also distinguishes the local covariate adapter from the globally fitted supervised models, which estimate production effects from hundreds of records. The diagnostic concerns the tested short-context XReg configuration. It does not establish how a longer context or a separately selected, stabilized adapter would perform. The machine and week breakdowns in Figure~\ref{fig:gpustrata}, together with the complete predictions in Figure~\ref{fig:gpuall}, show the variation hidden by the overall ranking.
-
-\fig{09_gpu_stratification}{gpustrata}{1}{MAE by machine and validation week for the same eight methods. Values are kWh per record; the labels give the number of targets in each stratum. The colour scale ends at 130 kWh to make differences among the lower errors readable, while printed values preserve every result above that limit. Machine and week panels are two views of the same 584 targets.}
-
-\fig{10_gpu_all_predictions}{gpuall}{1}{All 4,672 predictions from the matched comparison: eight methods evaluated on 584 identical records. Colours identify the three machines and the dashed diagonal marks equality. The main axes share a 0--1,100 kWh range. The TimesFM XReg panel also includes a full-range inset containing all its predictions, including the three extremes. MAE and RMSE use the complete data in every panel.}
+The TimesFM XReg configuration produced three extreme Pellet~3 predictions of about 2,753, 9,239 and 12,203~kWh for observed values of 185.4, 142.4 and 70.9~kWh. In those contexts dosed mass had almost no historical variability, so the standardized current mass extrapolated far outside the local range; an independent float64 reconstruction reproduced the behaviour, and the three predictions are retained in the official metrics. The diagnosis concerns numerical instability of this short-context XReg pipeline and says nothing about TimesFM with longer contexts or other scaling and regularization policies. Under the tested 16-record, same-line, within-week representation, historical inputs did not improve prediction over current-record covariates. This does not imply that operating histories lack value under other context definitions, longer observation periods or prospectively selected temporal models.
 
 \FloatBarrier
-\subsection{Interpreting estimates and their uncertainty}
-The selected Ridge model allows each estimate to be traced to its inputs. Grouping the encoded columns by variable gives the untruncated prediction
-\begin{equation}
- f_i=\widehat b+\sum_{g\in\mathcal G}C_{ig},\qquad
- C_{ig}=\sum_{k\in g}z_{ik}\widehat\beta_k,
- \label{eq:explain}
-\end{equation}
-where $\mathcal G$ comprises mass, batch count, hour, weekday, machine, product subfamily, presentation and bag/bulk category. This sum reproduces all 798 stored test estimates to within $1.2\times10^{-13}$ kWh; none requires non-negative clipping. Figure~\ref{fig:explanation} distinguishes the fitted coefficients from the contributions they make to actual records.
+\subsection{Additive decomposition of the fitted predictor}
+Figure~\ref{fig:framework} shows the operation-level output of the baseline: panel (a) the transformation of recorded production characteristics into an expected electricity value, a residual interval and a signed deviation, and panel (b) these outputs for source row 2080, a Pellet~2 operation with 18.002~t distributed over five dosing batches. The model estimated 255.90~kWh; the recorded value was 267.30~kWh, a residual of 11.40~kWh inside the fixed 95\% interval of [122.94, 388.85]~kWh. The record was chosen because its observed energy is close to the median test value; it does not represent the whole error distribution.
 
-At fixed values of the other inputs, the mass coefficient corresponds to 13.30 kWh per additional tonne and the batch-count coefficient to 9.52 kWh per additional dosing batch. Their positive signs agree with an increasing energy requirement as the recorded production quantity increases. Mass and batch count are correlated, however, so the two coefficients are conditional associations rather than separately identified physical constants. The categorical effects require similar care because product, presentation and machine allocation are not randomized. In the fitted one-hot representation, the intercept of 288.09 kWh is an algebraic reference and cannot be interpreted as measured standby consumption. Small machine coefficients likewise do not establish equal intrinsic efficiency.
+\fig{00_framework}{framework}{1}{Production-adjusted baseline output. (a) Recorded production conditions are transformed into an expected electricity value, residual intervals and a signed deviation; residuals from the later calibration period set the interval limits. (b) A real Pellet~2 operation (source row 2080): the light segment is the fixed 95\% interval, the dark segment the 90\% interval, the circle the estimate and the diamond the observed energy. An excess above the estimate is a model residual, not a measured saving or a confirmed fault.}
 
-The real operation introduced in Figure~\ref{fig:framework} provides a concrete example. For 18.002 t dosed in five batches on Pellet~2, the model estimates 255.90 kWh and a fixed 95\% interval of [122.94, 388.85] kWh. The recorded outcome is 267.30 kWh, an excess of 11.40 kWh over the estimate and well inside the interval. This record was chosen near the median observed test energy to illustrate the calculation. Its error is not representative of every operation, as the complete residual plots show.
+Applying Equation~\ref{eq:explain} to every frozen estimate reproduced all 798 archived test values to within $1.2\times10^{-13}$~kWh, and none required non-negative clipping. Figure~\ref{fig:explanation} separates the fitted coefficients from record-specific contributions: panel (a) gives the numerical coefficients in original input units, (b) the categorical coefficients under the fitted coding, (c) the distributions of the grouped contributions and (d) the decomposition of source row 2080, whose intercept and eight grouped contributions sum exactly to 255.90~kWh. After undoing the standardization used in fitting, the mass coefficient is 13.30~kWh per additional tonne and the dosing-batch coefficient 9.52~kWh per additional batch, conditional on the other encoded predictors.
 
-\fig{11_explanation}{explanation}{1}{The frozen Ridge model from coefficients to individual estimates. (a) Numerical coefficients per training standard deviation. (b) All 16 categorical coefficients in the fitted encoding. (c) Grouped contributions for every test record, with medians in red and interquartile ranges in orange; small vertical jitter separates coincident values. (d) Arithmetic decomposition of source row 2080, the example in Figure~\ref{fig:framework}. The reference combines standardized numerical means with all-zero categorical indicators and need not describe a feasible operating condition. Contributions are conditional model terms, not causal effects.}
+\fig{11_explanation}{explanation}{1}{Additive decomposition of the frozen Ridge predictor. (a) Numerical coefficients in original input units. (b) All 16 categorical coefficients under the fitted coding. (c) Grouped contributions for every test record, with medians in red and interquartile ranges in orange. (d) Arithmetic decomposition of source row 2080. The reference combines standardized numerical means with all-zero categorical indicators and need not describe a feasible operating condition; contributions are conditional model terms, not causal effects.}
 
-Two exploratory extensions helped identify where modest improvements might arise (Table~\ref{tab:explore}). Allowing the mass association to vary by product subfamily reduced development MAE by 1.44 kWh, or 2.80\%. A shrunk correction from recent completed residuals reduced it by 1.71 kWh, or 3.33\%. Both retained positive intervals after adjustment for the three exploratory comparisons. By contrast, allowing mass effects to vary only by machine produced a small reduction of 0.22 kWh, with an interval that crossed zero. Figure~\ref{fig:development} shows these comparisons and their machine and week breakdowns. Product structure and stabilized residual updates are therefore candidates for a subsequent evaluation; these exploratory findings did not replace the frozen baseline.
+These values are coefficients of a fitted linear predictor, not separately identified physical requirements. Mass and batch count are correlated, and line and product allocation were not randomized, so their signs and magnitudes describe conditional associations. The intercept of 288.09~kWh is the algebraic reference of the fitted coding, not a standby consumption; categorical coefficients depend on the one-hot representation and its reference configuration; and small line coefficients do not demonstrate equal intrinsic efficiency among the lines. What the exact equality does provide is record-level traceability, without assigning causal meaning or physically separable energy uses to individual terms.
 
-\input{sections/table_explore}
+\FloatBarrier
+\subsection{Post-hoc exploratory extensions}
+Three post-hoc extensions were evaluated on the 800 development records (Table~\ref{tab:explore}). Letting the mass association vary by product subfamily reduced MAE by 1.44~kWh (2.80\%) and the recent-residual correction by 1.71~kWh (3.33\%), both with multiplicity-adjusted intervals above zero; the line-dependent mass interaction reduced MAE by only 0.22~kWh, with an interval crossing zero. The gains varied across lines and validation weeks. Because H1--H3 were motivated by patterns observed during development, they are hypothesis-generating and need evaluation in a new chronological period; they do not replace the specification frozen for the primary test.
 
-\fig{03_development_and_hypotheses}{development}{1}{Original development results and exploratory extensions. (a) MAE of the seven original methods on 800 common records. (b) Paired MAE reductions relative to Ridge for machine-dependent mass effects (H1), product-dependent mass effects (H2) and recent-residual correction (H3), with 95\% and multiplicity-adjusted 98.33\% intervals. (c,d) Reductions by machine and validation week; positive values favour the extension. These strata describe the same development records.}
+\begin{table}[!htbp]\centering\small
+\caption{Post-hoc exploratory point-model extensions on the 800 development records. Positive reductions favour the extension; the adjusted intervals cover these three comparisons only.}\label{tab:explore}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Variant & MAE & MAE reduction & Adjusted 98.33\% interval \\\midrule
+H1: mass by pelleting line & 51.26 & 0.22 & [$-0.08$, 0.58] \\
+H2: mass by subfamily & 50.04 & 1.44 & [0.55, 2.48] \\
+H3: recent residuals & 49.77 & 1.71 & [0.24, 3.16] \\\bottomrule
+\end{tabular}\par\vspace{4pt}\footnotesize All quantities are in kWh per record.
+\end{table}
 
-Uncertainty remained less uniform than the point comparison. The frozen 90\% and 95\% intervals covered 85.96\% and 93.23\% of test records, with mean widths of 183.63 and 258.85 kWh. Their block-bootstrap 95\% coverage intervals were [81.86, 90.24]\% and [90.53, 95.87]\%, respectively, so nominal coverage was still compatible with sampling uncertainty at the global level. Machine-level 95\% coverage was 90.00\% for Pellet~1, 96.40\% for Pellet~2 and 91.70\% for Pellet~3. Of the 54 records outside those limits, 45 were above and nine below them. These are candidates for review, without an independent diagnosis of their cause (Figure~\ref{fig:alltest}).
+\subsection{Residual intervals and records flagged for review}
+Figure~\ref{fig:alltest} shows the frozen estimates and fixed 95\% intervals for every test record, in chronological order within each line. The fixed 90\% and 95\% intervals covered 85.96\% and 93.23\% of the 798 records with mean widths of 183.63 and 258.85~kWh; their block-bootstrap 95\% coverage intervals, [81.86, 90.24]\% and [90.53, 95.87]\%, make global coverage broadly compatible with the nominal levels. Line-specific coverage differed: at the nominal 95\% level it was 90.00\% on Pellet~1 (20 records outside the interval), 96.40\% on Pellet~2 (12) and 91.70\% on Pellet~3 (22).
 
-\fig{05_all_test_records}{alltest}{1}{Every original test record in chronological order within its machine. Black points show observed electricity, coloured points the frozen estimate and individual vertical lines the fixed 95\% intervals. Red circles identify the 54 outcomes outside their intervals. Horizontal positions are record order, so equal spacing does not imply equal elapsed time. All 798 observations and their intervals are retained, without joining adjacent records into a continuous uncertainty band.}
+\fig{05_all_test_records}{alltest}{1}{Frozen Ridge estimates and fixed 95\% residual intervals for every test record, in chronological order within each pelleting line. Black points are observed electricity, coloured points the frozen estimate and vertical lines the intervals; red circles mark the 54 outcomes outside their intervals. Horizontal position is record order, so equal spacing does not imply equal elapsed time.}
 
-Updating the interval quantiles from the most recent 200 completed residuals increased coverage to 89.47\% and 94.49\%. It also increased mean width by 19.66\% and 18.85\%, while interval score improved by only 1.12\% and 0.23\% (Table~\ref{tab:intervals}). The weekly profiles in Figure~\ref{fig:uncertainty} show that coverage and width moved together. The number of records outside the 95\% interval fell from 54 to 44, but these counts cannot be interpreted as false alarms without plant adjudication. The update was explored after the original test had been examined and provides a calibration diagnostic rather than a second independent validation.
+In total 54 records fell outside the fixed 95\% intervals, 45 above the upper limit and nine below the lower one: about 6.77 flagged records per 100 operations, 5.64 upper and 1.13 lower exceedances. They are candidates for technical review because the calibrated baseline did not represent their energy well; without independent plant evidence they should not be classed as confirmed anomalies, inefficient operations, equipment faults or avoidable consumption.
 
-\input{sections/table_intervals}
+The post-hoc rolling policy, which updates the quantiles from the most recent 200 completed residuals, raised coverage to 89.47\% and 94.49\% but widened the intervals by 19.66\% and 18.85\% while improving the interval score by only 1.12\% and 0.23\% (Table~\ref{tab:intervals}); most of the additional coverage came from width. The number of records outside the 95\% interval fell from 54 to 44. Because the policy was defined after the test results had been inspected and was not evaluated on an independent period, it is a calibration diagnostic, not a validated replacement for the fixed intervals.
 
-\fig{06_uncertainty_tradeoff}{uncertainty}{1}{Coverage, width and interval score for fixed calibration and the exploratory rolling update. (a,b) Machine-specific coverage against mean interval width at nominal 90\% and 95\% levels; arrows connect fixed intervals (circles) to updated intervals (triangles). (c,d) Weekly 95\% coverage and interval score, with sample sizes shown and partial weeks at the edges. Dashed horizontal lines indicate nominal coverage. Lower interval score is preferable. Both policies use the same 798 fixed point predictions.}
+\begin{table}[!htbp]\centering\small\setlength{\tabcolsep}{4.5pt}
+\caption{Fixed and post-hoc rolling residual intervals on the same 798 frozen point predictions. The rolling policy has not been validated on an independent period.}\label{tab:intervals}
+\begin{tabular}{@{}llrrr@{}}\toprule
+Policy & Nominal level & Coverage (\%) & Mean width & Interval score \\\midrule
+Fixed & 90\% & 85.96 & 183.63 & 381.79 \\
+Rolling, 200 residuals & 90\% & 89.47 & 219.74 & 377.51 \\
+Fixed & 95\% & 93.23 & 258.85 & 497.64 \\
+Rolling, 200 residuals & 95\% & 94.49 & 307.64 & 496.48 \\\bottomrule
+\end{tabular}\par\vspace{4pt}\footnotesize Width and interval score are in kWh per record.
+\end{table}
