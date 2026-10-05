@@ -17,6 +17,8 @@ plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10.5,'axes.titlesiz
  'legend.fontsize':9.2,'pdf.fonttype':42,'ps.fonttype':42,'savefig.dpi':320,'axes.linewidth':.65,'text.color':'#203D50','axes.labelcolor':'#203D50','xtick.color':'#53636F','ytick.color':'#53636F'})
 C={'Pellet 1':'#2367A0','Pellet 2':'#C77C19','Pellet 3':'#27816B'}
 dark='#17364D';grey='#6E7881';red='#B74538'
+for _t in ['variables_source.csv','prueba_original.csv','gpu/predictions.csv']:
+    if not (D/_t).is_file():raise SystemExit('Record-level tables are available from the corresponding author on request; see README (Data access).')
 d=pd.read_csv(D/'variables_source.csv',parse_dates=['inicio_registro','inicio_peletizado','fin_peletizado'])
 test=pd.read_csv(D/'prueba_original.csv',parse_dates=['inicio_registro','fin_peletizado'])
 gpu=pd.read_csv(D/'gpu/predictions.csv',parse_dates=['inicio_registro'])

@@ -1,20 +1,20 @@
 {
-  "research": {
-    "name": "pelleting-energy-baseline-real-data-research-v3.zip",
-    "bytes": 69404412,
-    "sha256": "97168913a949e71a5eb8758f9289731e980cf24e285783f0b166b7593f842662",
-    "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v3-reproducibility/pelleting-energy-baseline-real-data-research-v3.zip"
-  },
   "overleaf": {
     "name": "pelleting-energy-baseline-real-data-Overleaf.zip",
-    "bytes": 1764031,
-    "sha256": "a395ead76cd2a8042df0a84d2979ba2677558941210201bc88a8004f880de832",
+    "bytes": 1764709,
+    "sha256": "aa7c81f9c1feb7ae119e1eb98b081078a3dbbfa20133dd07688ea1580ddcfa3e",
     "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v4-submission/pelleting-energy-baseline-real-data-Overleaf.zip"
   },
   "paper_pdf": {
     "name": "Paper_Peletizado_Datos_Reales_v4.pdf",
-    "bytes": 1047513,
-    "sha256": "cb43c97ffa70eb2e32007bb2d087a683ac40aedd1e7a32c2ed97e1ac9ee76fe4",
+    "bytes": 1048212,
+    "sha256": "76ce3277fd10e02d72c746f7d5350635ea390e1a1a34cadf75e775cfb522e61b",
     "url": "https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/download/v4-submission/Paper_Peletizado_Datos_Reales_v4.pdf"
+  },
+  "research": {
+    "name": "pelleting-energy-baseline-real-data-research-v3.zip",
+    "distribution": "on request",
+    "contact": "fmarrabal@ual.es",
+    "note": "Withdrawn from public releases on 2026-10-05; the file inventory and SHA-256 of its contents remain in research_files.json."
   }
 }

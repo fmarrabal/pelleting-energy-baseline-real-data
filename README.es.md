@@ -10,6 +10,10 @@ Estudio complementario: [GitHub](https://github.com/fmarrabal/pelleting-energy-b
 
 `latex/` contiene ahora el **manuscrito v4**, *Explainable production-adjusted electrical-energy baselines for industrial feed pelleting*, la versión enviada a *Energy* (Elsevier): clase `elsarticle`, bloque de autores con afiliaciones y ORCID, highlights, nomenclatura, el texto y la estructura revisados por los coautores, una figura de flujo metodológico (`figures/13_DiagramaFlujoProced.pdf`, estática) y las declaraciones CRediT, de financiación, de conflicto de intereses, de disponibilidad de datos y de uso de IA. **Ningún experimento, cifra ni valor de tabla cambió** entre v3 y v4. Las figuras se regeneraron con `analysis/make_figures.py` tras sustituir la etiqueta "machine" por "pelleting line" (la terminología del manuscrito); `reproduce.py figures` las reproduce. `main_review.tex` compila el mismo manuscrito con numeración de líneas y doble espacio. El PDF compilado es `latex/Paper_Peletizado_Datos_Reales_v4.pdf`; el PDF v3 sustituido sigue disponible como asset de la release `v3-reproducibility`. Se eliminaron del árbol los duplicados PNG/SVG de las figuras, el ZIP de Overleaf y los scripts de construcción `src/paper_datos_reales_v1`–`v2`, ya superados; el ZIP de Overleaf se distribuye como asset de la release `v4-submission`.
 
+## Acceso a los datos (5 de octubre de 2026)
+
+Los registros industriales de producción y electricidad pertenecen a la planta y **no se distribuyen públicamente**. El 5 de octubre de 2026 se retiró el archivo de investigación de las releases de GitHub y se eliminaron del repositorio y de su historial todas las tablas por registro (`analysis/data/variables_source.csv`, `registros_reales_figuras.csv`, `prueba_original.csv`, `predicciones_desarrollo.csv`, `hipotesis_predicciones.csv`, `intervalos_registro.csv`, `ridge_additive_components.csv`, `example_window.csv` y los ficheros por registro de `analysis/data/gpu/`). El repositorio conserva el código, las configuraciones de los modelos congelados, los resultados agregados, los scripts de figuras y las fuentes LaTeX. Los registros, las tablas por registro y el archivo completo pueden solicitarse al autor de correspondencia (**fmarrabal@ual.es**), sujeto al acuerdo del propietario de los datos; `reproduce.py verify` y `reproduce.py paper` funcionan sin ellos, mientras que `metrics`, `figures` y `download` se detienen con un mensaje de solicitud hasta que los ficheros estén en su sitio.
+
 ## Pregunta científica y alcance
 
 El estudio evalúa hasta qué punto una línea base energética explicable predice la electricidad de un registro industrial de peletizado y si los modelos temporales o fundacionales aportan una mejora. La unidad de análisis es un **registro industrial irregular**, no una observación de sensores cada diez segundos. La salida es la **electricidad de peletizado en kWh por registro**. Se trata de una línea base retrospectiva condicionada a descriptores consolidados de producción: no se ha verificado de forma independiente que sus valores planificados estuvieran disponibles antes de comenzar la operación.
@@ -81,10 +85,10 @@ Los resultados sustentan una línea base para las condiciones registradas. No de
 README.md / README.es.md      Guías completas en inglés y español
 reproduce.py                 Verificación, métricas, figuras, PDF y preparación de entrenamientos
 package.json                 Modelos, recetas y revisiones fundacionales inmutables
-analysis/                    Scripts de figuras y datos numéricos suficientes para reconstruirlas
+analysis/                    Scripts de figuras y resultados agregados; las tablas por registro se entregan bajo solicitud
 latex/                       main.tex, main_review.tex, bibliografía, figuras (PDF), secciones/tablas y PDF v4
 src/                         Copia literal del código científico original, para inspección en GitHub
-research/                    Datos originales, resultados, modelos y protocolos completos
+research/                    (no distribuido) datos originales, resultados, modelos y protocolos; disponible bajo solicitud
 manifests/                   Inventarios por archivo y SHA-256 de los assets
 environment/                 Versiones observadas y dependencias
 provenance/                  Trazabilidad y verificaciones del manuscrito original
@@ -92,7 +96,7 @@ verification/                Comprobaciones realizadas durante la publicación d
 runs/                        Salidas nuevas: nunca sustituyen a los resultados congelados
 ```
 
-`research/` está completo en la carpeta local entregada. En GitHub se distribuye como asset de la release `v3-reproducibility`: **582 archivos**, 135.3 MB descomprimidos y 69.4 MB comprimidos. El repositorio conserva los datos derivados necesarios para regenerar las figuras sin descargar el archivo completo. No se requieren Git LFS ni GitHub Actions. Los pesos preentrenados se descargan de sus proveedores con una revisión exacta; no se redistribuyen las cachés ni los entornos virtuales.
+`research/` no se distribuye: contiene los registros industriales y se entrega únicamente bajo solicitud al autor de correspondencia (véase *Acceso a los datos*). No se requieren Git LFS ni GitHub Actions. Los pesos preentrenados se descargan de sus proveedores en la revisión exacta.
 
 ## Inicio rápido: reconstruir el artículo
 
@@ -114,15 +118,15 @@ python reproduce.py paper
 
 El último comando necesita **pdfLaTeX y BibTeX** de TeX Live o MiKTeX. `python reproduce.py all` ejecuta los cuatro pasos. Las salidas aparecen en `runs/replay/`, incluidas las métricas recalculadas y el PDF compilado. El PDF original de `latex/` se conserva. La reconstrucción no entrena ni selecciona modelos. Las tablas científicas originales se conservan en LaTeX; el estudio sintético también regenera sus tablas numéricas mediante el script de figuras.
 
-Para descargar y verificar todos los datos, modelos y predicciones:
+Con el archivo de investigación y las tablas por registro recibidos del autor de correspondencia, colócalos en `research/` y `analysis/data/` y ejecuta:
 
 ```bash
-python reproduce.py download
 python reproduce.py verify
 python reproduce.py metrics
+python reproduce.py figures
 ```
 
-La descarga emplea HTTPS, comprueba SHA-256 antes de extraer y verifica cada archivo. Si la descarga falla, puede obtenerse el ZIP desde [Releases](https://github.com/fmarrabal/pelleting-energy-baseline-real-data/releases/tag/v3-reproducibility) y guardarse en `downloads/`; el mismo comando valida y extrae el ZIP. La reconstrucción completa de métricas del estudio sintético añade la prueba de 169.876 orígenes cuando `research/` está instalado.
+`verify` comprueba cada fichero del archivo recibido con `manifests/research_files.json` antes de recalcular métricas o figuras.
 
 ## Repetir entrenamiento e inferencia
 
@@ -130,7 +134,6 @@ Primero instala las dependencias de entrenamiento y una compilación de PyTorch 
 
 ```bash
 python -m pip install -r requirements-training.txt
-python reproduce.py download
 python reproduce.py prepare-training --recipe real-gpu --destination runs/fresh-gpu
 python reproduce.py fetch-models --destination runs/fresh-gpu
 python runs/fresh-gpu/execute.py

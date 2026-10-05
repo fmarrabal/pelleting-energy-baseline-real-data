@@ -21,6 +21,22 @@ def run(args, cwd=ROOT):
     subprocess.run(list(map(str, args)), cwd=cwd, check=True)
 
 
+PRIVATE_TABLES = [
+    'variables_source.csv', 'registros_reales_figuras.csv', 'prueba_original.csv', 'predicciones_desarrollo.csv',
+    'hipotesis_predicciones.csv', 'intervalos_registro.csv', 'ridge_additive_components.csv', 'example_window.csv',
+    'gpu/predictions.csv', 'gpu/predictions_seeds.csv', 'gpu/paired_cpu_gpu_predictions.csv',
+    'gpu/chronos_normalization_diagnostic.csv']
+DATA_REQUEST = ('The industrial records and the record-level tables derived from them are not distributed publicly. '
+                'Request them from the corresponding author (fmarrabal@ual.es) and place the provided files in '
+                'analysis/data/ (and the research archive in research/) before running this command.')
+
+
+def private_data_required():
+    missing = [t for t in PRIVATE_TABLES if not (ROOT / 'analysis' / 'data' / t).is_file()]
+    if missing and CONFIG['kind'] == 'real':
+        raise SystemExit(DATA_REQUEST + ' Missing: ' + ', '.join(missing))
+
+
 def verify(require_research=False):
     checked = 0
     for name in ['tracked_files.json', 'research_files.json']:
@@ -42,29 +58,10 @@ def verify(require_research=False):
 
 
 def download():
+    """The research archive is no longer a public release asset."""
     if (ROOT / 'research').exists():
         return verify(True)
-    spec = json.loads((ROOT / 'manifests' / 'release_assets.json').read_text(encoding='utf8'))['research']
-    dest = ROOT / 'downloads' / spec['name']
-    dest.parent.mkdir(exist_ok=True)
-    if not dest.exists() or sha(dest) != spec['sha256']:
-        temp = dest.with_suffix('.part')
-        print('Downloading', spec['url'], flush=True)
-        req = urllib.request.Request(spec['url'], headers={'User-Agent': 'pelleting-reproducibility-v3'})
-        with urllib.request.urlopen(req, timeout=120) as src, temp.open('wb') as out:
-            shutil.copyfileobj(src, out, 1024 * 1024)
-        if sha(temp) != spec['sha256']:
-            raise RuntimeError('Download failed SHA-256 verification; archive has not been extracted.')
-        temp.replace(dest)
-    with zipfile.ZipFile(dest) as archive:
-        for member in archive.infolist():
-            target = (ROOT / member.filename).resolve()
-            if not target.is_relative_to((ROOT / 'research').resolve()):
-                raise RuntimeError('Unsafe archive path: ' + member.filename)
-            if (member.external_attr >> 16) & 0o170000 == 0o120000:
-                raise RuntimeError('Symbolic links are not accepted in research assets.')
-        archive.extractall(ROOT)
-    return verify(True)
+    raise SystemExit(DATA_REQUEST)
 
 
 def metrics():
@@ -72,6 +69,7 @@ def metrics():
     import pandas as pd
     data = ROOT / 'analysis' / 'data'
     rows = []
+    private_data_required()
     if CONFIG['kind'] == 'real':
         test = pd.read_csv(data / 'prueba_original.csv')
         for model in ['Ridge', 'SEC']:
@@ -132,6 +130,7 @@ def metrics():
 
 
 def figures():
+    private_data_required()
     stage = ROOT / 'runs' / 'replay' / 'analysis'
     shutil.copytree(ROOT / 'analysis', stage, dirs_exist_ok=True)
     run([sys.executable, '-X', 'utf8', stage / 'make_figures.py'])
