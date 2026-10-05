@@ -1,0 +1,30 @@
+\begin{table}[!htbp]\centering\footnotesize
+\caption{All 22 coefficients of the frozen Ridge model (penalty 10, fitted on 1,542 development records). Intercept: 288.09 kWh. Numerical coefficients are per training standard deviation; one-hot coefficients are per indicator.}\label{tab:s_coefficients}
+\begin{tabular}{@{}llr@{}}\toprule
+Encoded variable & Type & Coefficient (kWh) \\\midrule
+Dosed mass & numerical (per training SD) & 73.9003 \\
+Dosing batches & numerical (per training SD) & 14.2309 \\
+Origin hour, sine & numerical (per training SD) & 0.1912 \\
+Origin hour, cosine & numerical (per training SD) & $-0.0496$ \\
+Weekday, sine & numerical (per training SD) & $-1.8094$ \\
+Weekday, cosine & numerical (per training SD) & $-1.4544$ \\
+\texttt{Pellet 1} & pelleting line (one-hot) & $-0.7987$ \\
+\texttt{Pellet 2} & pelleting line (one-hot) & 0.1181 \\
+\texttt{Pellet 3} & pelleting line (one-hot) & 0.6806 \\
+\texttt{SUBLINEA AVICULTURA ENGORDE} & product subfamily (one-hot) & $-10.9350$ \\
+\texttt{SUBLINEA AVICULTURA POSTURA} & product subfamily (one-hot) & $-27.4928$ \\
+\texttt{SUBLINEA EQUINOS} & product subfamily (one-hot) & 5.2334 \\
+\texttt{SUBLINEA GANADERIA CARNE} & product subfamily (one-hot) & $-20.7153$ \\
+\texttt{SUBLINEA GANADERIA LECHE} & product subfamily (one-hot) & 11.0388 \\
+\texttt{SUBLINEA OTROS CONEJOS} & product subfamily (one-hot) & 4.9565 \\
+\texttt{SUBLINEA PORCICULTURA CEBA} & product subfamily (one-hot) & $-52.8982$ \\
+\texttt{SUBLINEA PORCICULTURA CRIA} & product subfamily (one-hot) & 23.0575 \\
+\texttt{SUBLINEA PORCICULTURA PREINICIADORES} & product subfamily (one-hot) & 67.7552 \\
+\texttt{CROMBELIZADO} & presentation (one-hot) & 54.3247 \\
+\texttt{PELETIZADO} & presentation (one-hot) & $-54.3247$ \\
+\texttt{programada\_ENSAQUE} & bag/bulk (one-hot) & 15.5600 \\
+\texttt{programada\_GRANEL} & bag/bulk (one-hot) & $-15.5600$ \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\footnotesize With an unpenalized intercept and complete one-hot sets, the penalized solution centres each categorical set, which is why the two-level fields (presentation, bag/bulk) carry opposite coefficients of equal magnitude.
+\end{table}

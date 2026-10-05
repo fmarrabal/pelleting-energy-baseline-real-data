@@ -1,0 +1,31 @@
+\begin{table}[!htbp]\centering\scriptsize
+\caption{Matched temporal benchmark by pelleting line (149, 257 and 178 targets on Pellet~1, 2 and 3).}\label{tab:s_by_line}
+\begin{tabular}{@{}llrrrrrr@{}}\toprule
+Method & Line & $n$ & MAE & RMSE & Bias & WAPE (\%) & Neg. \\\midrule
+Ridge, current inputs & Pellet 1 & 149 & 48.96 & 78.25 & $-1.80$ & 22.11 & 0 \\
+Ridge, current inputs & Pellet 2 & 257 & 48.13 & 65.50 & $-17.04$ & 19.29 & 0 \\
+Ridge, current inputs & Pellet 3 & 178 & 65.20 & 90.22 & 10.62 & 20.57 & 0 \\
+Ridge, full 16-record window & Pellet 1 & 149 & 58.89 & 81.23 & $-4.82$ & 26.60 & 0 \\
+Ridge, full 16-record window & Pellet 2 & 257 & 57.71 & 74.63 & $-13.50$ & 23.13 & 2 \\
+Ridge, full 16-record window & Pellet 3 & 178 & 77.19 & 103.31 & 18.87 & 24.35 & 0 \\
+TFT & Pellet 1 & 149 & 49.21 & 79.60 & $-6.38$ & 22.22 & 0 \\
+TFT & Pellet 2 & 257 & 47.22 & 66.22 & $-19.56$ & 18.93 & 0 \\
+TFT & Pellet 3 & 178 & 66.65 & 94.32 & $-3.26$ & 21.03 & 0 \\
+N-HiTS & Pellet 1 & 149 & 62.07 & 92.71 & $-10.29$ & 28.03 & 0 \\
+N-HiTS & Pellet 2 & 257 & 56.85 & 76.30 & $-11.49$ & 22.78 & 1 \\
+N-HiTS & Pellet 3 & 178 & 80.14 & 111.84 & 15.20 & 25.28 & 0 \\
+Chronos-2 + covariates & Pellet 1 & 149 & 81.78 & 115.21 & $-11.52$ & 36.93 & 0 \\
+Chronos-2 + covariates & Pellet 2 & 257 & 70.10 & 98.97 & $-8.20$ & 28.09 & 0 \\
+Chronos-2 + covariates & Pellet 3 & 178 & 110.94 & 150.47 & $-5.12$ & 35.00 & 0 \\
+TimesFM 2.5, energy only & Pellet 1 & 149 & 97.50 & 132.42 & $-13.96$ & 44.04 & 0 \\
+TimesFM 2.5, energy only & Pellet 2 & 257 & 78.83 & 107.38 & $-4.76$ & 31.59 & 0 \\
+TimesFM 2.5, energy only & Pellet 3 & 178 & 120.84 & 157.29 & $-11.70$ & 38.12 & 0 \\
+Chronos-2, energy only & Pellet 1 & 149 & 99.07 & 134.29 & $-16.12$ & 44.75 & 0 \\
+Chronos-2, energy only & Pellet 2 & 257 & 81.34 & 111.66 & $-8.05$ & 32.60 & 0 \\
+Chronos-2, energy only & Pellet 3 & 178 & 127.79 & 167.34 & $-12.96$ & 40.31 & 0 \\
+TimesFM 2.5 + XReg & Pellet 1 & 149 & 65.78 & 101.22 & $-13.49$ & 29.71 & 0 \\
+TimesFM 2.5 + XReg & Pellet 2 & 257 & 61.86 & 87.28 & $-9.45$ & 24.79 & 0 \\
+TimesFM 2.5 + XReg & Pellet 3 & 178 & 223.48 & 1159.18 & 116.90 & 70.50 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
