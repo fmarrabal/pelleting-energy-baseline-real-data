@@ -2,13 +2,17 @@
 
 [English](README.md) | **Español**
 
-Archivo de reproducción del manuscrito **Paper_Peletizado_Datos_Reales_v4.pdf**. Incluye los datos originales, código, resultados congelados y proyecto LaTeX/Overleaf.
+Archivo de reproducción del manuscrito **Paper_Peletizado_Datos_Reales_v5_EnergyAI.pdf**. Incluye los datos originales, código, resultados congelados y proyecto LaTeX/Overleaf.
 
 Estudio complementario: [GitHub](https://github.com/fmarrabal/pelleting-energy-baselines-synthetic).
 
+## Actualización (2026-10-09): manuscrito v5 enviado a *Energy and AI*
+
+El manuscrito v4 fue cribado por *Energy* sin pasar a revisión (novedad poco clara respecto a la literatura de esa revista). `latex/` contiene ahora el **manuscrito v5**, enviado a *Energy and AI*: nueva subsección *Related work* con tabla comparativa de los diez estudios más cercanos, objetivo explícito y tres frases de contribución, 18 referencias verificadas de *Energy and AI* y un texto principal más corto (unas 5.700 palabras). **Ningún experimento, cifra, valor de tabla ni figura cambió.** Los ficheros compilados son `latex/Paper_Peletizado_Datos_Reales_v5_EnergyAI.pdf` y `latex/Supplementary_Material_v5.pdf`; el ZIP de Overleaf es el asset de la release `v5-energy-and-ai`.
+
 ## Actualización (5 de octubre de 2026): manuscrito v4 enviado a *Energy*
 
-`latex/` contiene ahora el **manuscrito v4**, *Explainable production-adjusted electrical-energy baselines for industrial feed pelleting*, la versión enviada a *Energy* (Elsevier): clase `elsarticle`, bloque de autores con afiliaciones y ORCID, highlights, nomenclatura, el texto y la estructura revisados por los coautores, una figura de flujo metodológico (`figures/13_DiagramaFlujoProced.pdf`, estática) y las declaraciones CRediT, de financiación, de conflicto de intereses, de disponibilidad de datos y de uso de IA. **Ningún experimento, cifra ni valor de tabla cambió** entre v3 y v4. Las figuras se regeneraron con `analysis/make_figures.py` tras sustituir la etiqueta "machine" por "pelleting line" (la terminología del manuscrito); `reproduce.py figures` las reproduce. `main_review.tex` compila el mismo manuscrito con numeración de líneas y doble espacio. El PDF compilado es `latex/Paper_Peletizado_Datos_Reales_v4.pdf`; el PDF v3 sustituido sigue disponible como asset de la release `v3-reproducibility`. Se eliminaron del árbol los duplicados PNG/SVG de las figuras, el ZIP de Overleaf y los scripts de construcción `src/paper_datos_reales_v1`–`v2`, ya superados; el ZIP de Overleaf se distribuye como asset de la release `v4-submission`.
+`latex/` contiene ahora el **manuscrito v4**, *Explainable production-adjusted electrical-energy baselines for industrial feed pelleting*, la versión enviada a *Energy* (Elsevier): clase `elsarticle`, bloque de autores con afiliaciones y ORCID, highlights, nomenclatura, el texto y la estructura revisados por los coautores, una figura de flujo metodológico (`figures/13_DiagramaFlujoProced.pdf`, estática) y las declaraciones CRediT, de financiación, de conflicto de intereses, de disponibilidad de datos y de uso de IA. **Ningún experimento, cifra ni valor de tabla cambió** entre v3 y v4. Las figuras se regeneraron con `analysis/make_figures.py` tras sustituir la etiqueta "machine" por "pelleting line" (la terminología del manuscrito); `reproduce.py figures` las reproduce. `main_review.tex` compila el mismo manuscrito con numeración de líneas y doble espacio. El PDF compilado es `latex/Paper_Peletizado_Datos_Reales_v5_EnergyAI.pdf`; el PDF v3 sustituido sigue disponible como asset de la release `v3-reproducibility`. Se eliminaron del árbol los duplicados PNG/SVG de las figuras, el ZIP de Overleaf y los scripts de construcción `src/paper_datos_reales_v1`–`v2`, ya superados; el ZIP de Overleaf se distribuye como asset de la release `v4-submission`.
 
 ## Acceso a los datos (5 de octubre de 2026)
 

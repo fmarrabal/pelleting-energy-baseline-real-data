@@ -18,7 +18,7 @@
 \newcommand{\ind}{\mathbf{1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \newcommand{\fig}[4]{\begin{figure}[!htbp]\centering\includegraphics[width=#3\linewidth]{figures/#1.pdf}\caption{#4}\label{fig:#2}\end{figure}}
-\journal{Energy}
+\journal{Energy and AI}
 
 \begin{document}
 \ifdefined\withlinenumbers\linenumbers\fi
@@ -28,13 +28,13 @@
 \input{sections/authors}
 
 \begin{abstract}
-Electricity use in industrial feed pelleting varies with the quantity produced, the product, the pelleting line and the batch organization, so neither raw consumption nor a single specific energy consumption (SEC) figure says much about energy performance. This retrospective study developed and chronologically evaluated an explainable, production-adjusted electricity baseline and asked whether histories of completed operations improve it. The data are 2,745 records from three pelleting lines, 2,742 with positive recorded energy; the inputs are dosed mass, dosing-batch count, product characteristics, pelleting-line identity and calendar variables. Seven methods were compared on 800 chronologically ordered development targets; the selected Ridge regression was then frozen and evaluated against line-specific SEC on 798 later records. Eight current-input, history-enabled, temporal and pretrained configurations were also compared on 584 matched targets with 16 completed same-line operations as context. Ridge reduced test MAE from 61.29 to 52.45~kWh, 14.42\% below line-specific SEC; this is lower prediction error, not an energy saving. On the matched population the Temporal Fusion Transformer reached 53.65~kWh against 53.55~kWh for current-input Ridge, with no evidence of paired improvement, and the tested N-HiTS, TimesFM~2.5 and Chronos-2 configurations were less accurate. Performance was most consistent on Pellet~2 and Pellet~3; Pellet~1 also improved over SEC but remained systematically underestimated. Fixed 90\% and 95\% residual intervals covered 85.96\% and 93.23\% of the test records. Ridge provides a transparent retrospective baseline; prospective use requires verified inputs and measurement boundaries, line-specific acceptance criteria and validation on a new consecutive period.
+This study asks whether an explainable, production-adjusted baseline can state how much electricity a feed-pelleting operation should have used, and whether operating histories, modern temporal models or pretrained foundation models add anything to it. Electricity use in pelleting varies with the quantity produced, the product, the line and the batch organization, so neither raw consumption nor a single specific energy consumption (SEC) figure says much about performance. We use 2,745 real records from three industrial lines (2,742 with positive energy) with dosed mass, dosing-batch count, product characteristics, line identity and calendar variables as inputs. Seven methods were compared on 800 chronologically ordered development targets; the selected Ridge regression was frozen, with its interval calibration, and evaluated once against line-specific SEC on 798 later records. Eight current-input, history-enabled, temporal and pretrained configurations were compared on 584 matched targets with 16 completed same-line operations as context. Ridge reduced test MAE from 61.29 to 52.45~kWh, 14.42\% below SEC, on all three lines; this is lower prediction error, not an energy saving. The Temporal Fusion Transformer reached 53.65~kWh against 53.55~kWh for current-input Ridge, with no evidence of paired improvement, and N-HiTS, TimesFM~2.5 and Chronos-2 were less accurate. Every estimate decomposes exactly into its inputs, and fixed 90\% and 95\% residual intervals covered 85.96\% and 93.23\% of the test records, with one line systematically underestimated. The baseline is ready for retrospective assessment and for a digital twin; prospective use needs verified inputs, line-specific acceptance criteria and a new consecutive period.
 \end{abstract}
 
 \begin{highlights}
 \item Production-adjusted electricity baseline from 2,745 real feed-pelleting records
 \item Frozen Ridge model cuts test MAE by 14.42\% relative to line-specific SEC
-\item Completed same-line histories, TFT, N-HiTS, TimesFM 2.5 and Chronos-2 add no accuracy
+\item TFT, N-HiTS, TimesFM 2.5 and Chronos-2 add no accuracy on identical plant records
 \item Exact additive decomposition traces each kWh estimate to recorded production inputs
 \item Fixed 90\%/95\% residual intervals cover 85.96\% and 93.23\% of later test records
 \end{highlights}

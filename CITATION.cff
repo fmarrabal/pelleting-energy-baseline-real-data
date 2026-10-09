@@ -18,8 +18,8 @@ authors:
     given-names: "Francisco Manuel"
     orcid: "https://orcid.org/0000-0002-5510-6297"
     affiliation: "Department of Engineering, Research Centre CIAIMBITAL, Escuela Superior de Ingeniería, University of Almería, Almería, Spain"
-version: "v4-submission"
-date-released: "2026-10-05"
+version: "v5-energy-and-ai"
+date-released: "2026-10-09"
 url: "https://github.com/fmarrabal/pelleting-energy-baseline-real-data"
 repository-code: "https://github.com/fmarrabal/pelleting-energy-baseline-real-data"
 preferred-citation:
@@ -34,5 +34,5 @@ preferred-citation:
       given-names: "Eder Elías"
     - family-names: "Arrabal-Campos"
       given-names: "Francisco Manuel"
-  journal: "Energy (submitted)"
+  journal: "Energy and AI (submitted)"
   year: 2026

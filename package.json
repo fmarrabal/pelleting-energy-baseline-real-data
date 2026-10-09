@@ -1,6 +1,6 @@
 {
   "repo": "pelleting-energy-baseline-real-data",
-  "pdf": "Paper_Peletizado_Datos_Reales_v4.pdf",
+  "pdf": "Paper_Peletizado_Datos_Reales_v5_EnergyAI.pdf",
   "title": "Explainable production-adjusted electrical-energy baselines for industrial feed pelleting",
   "recipes": {
     "real-static": {
@@ -55,7 +55,7 @@
     }
   },
   "kind": "real",
-  "version": "v4-submission",
+  "version": "v5-energy-and-ai",
   "foundations": {
     "TimesFM_2.5": {
       "repo": "google/timesfm-2.5-200m-pytorch",

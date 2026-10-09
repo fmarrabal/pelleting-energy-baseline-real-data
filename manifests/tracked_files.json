@@ -8,20 +8,20 @@
     "sha256": "9243ca1c87e038fd6384139912f745bfa01eae572c4b93521baa194f7fe0ecca"
   },
   "CITATION.cff": {
-    "bytes": 1863,
-    "sha256": "b35d094b2949dae214f435858e8932b474ef7b2e549d8f47eb5a71f0b646fb6d"
+    "bytes": 1873,
+    "sha256": "c9a43fe625907c5752edb1821b44702ceae6a270cb9f0779cbbf9caf2bf207df"
   },
   "package.json": {
-    "bytes": 2178,
-    "sha256": "1cb403209548a152620ca7b8dcf97250011df860370fc73ef9391028f3745a55"
+    "bytes": 2190,
+    "sha256": "1d7854798355c00ecf9f4129e908c36e8e20c8fc67f3f04d3cd6ef110096da71"
   },
   "README.es.md": {
-    "bytes": 20841,
-    "sha256": "a7fb1ed62c9cc4bc6a368cbb1a736061673a274d1baddd51099e8229e0f2e1be"
+    "bytes": 21634,
+    "sha256": "8d89c2a69ba9b61d091d3f9d83adacc8feaf1be196e462ef91cf8b98b469106c"
   },
   "README.md": {
-    "bytes": 19513,
-    "sha256": "1c1d02869e18afc504637e93cfed96a57b7d32dbd4e08483d0f0547d62b78d27"
+    "bytes": 20269,
+    "sha256": "c6af4508b1139f16f409b043a9cc4f7aa9ee055cd9e2c4324dbc029eb6985c5d"
   },
   "reproduce.py": {
     "bytes": 15649,
@@ -192,28 +192,28 @@
     "sha256": "8d0854c131da2e86d0d63403271a4feb1e2304bfe49c58f55b1ab0d5629173ab"
   },
   "latex/main.tex": {
-    "bytes": 4435,
-    "sha256": "25637eb0c18b14a49aec0c5b3c1977d3ccc54f98bdafd1a803cfc2747d5b770b"
+    "bytes": 4378,
+    "sha256": "0735d33601cc9c35efbcc8a1877ed400748d10c359e953d77889be62d87e7f38"
   },
   "latex/main_review.tex": {
     "bytes": 274,
     "sha256": "9e8b321602b937bcb342a03225bdeb4e853ac51864fc264dff7fb1dac2181907"
   },
-  "latex/Paper_Peletizado_Datos_Reales_v4.pdf": {
-    "bytes": 1048650,
-    "sha256": "8cf77e92a29ba3ba856aa45c0ca54e7973b34930cf22a517474a5fd274580324"
+  "latex/Paper_Peletizado_Datos_Reales_v5_EnergyAI.pdf": {
+    "bytes": 1070608,
+    "sha256": "1f687f4e342b09f8885a7fd4ac5156d2850e7d292fd640998a14a158b100c513"
   },
   "latex/README_OVERLEAF.txt": {
-    "bytes": 681,
-    "sha256": "fb433aea968e206bf339df888aaa960d499f336497055298c3b34cb76c0bfbce"
+    "bytes": 703,
+    "sha256": "07aba8a8578618cabe2f3eca22c7d6de93e80f492c2a4d5daf36b05ca7dc3708"
   },
   "latex/references.bib": {
-    "bytes": 23010,
-    "sha256": "acf5a9409222292612b1f9d6eb4976f3ffe352dab6302099ece0fc9e73f04f56"
+    "bytes": 30000,
+    "sha256": "ad3c7640ec82a6c386fe25e17e7228b7ae93b38f6b8a7908a4d2ada083b1c7ea"
   },
-  "latex/Supplementary_Material_v4.pdf": {
+  "latex/Supplementary_Material_v5.pdf": {
     "bytes": 509835,
-    "sha256": "12d7592d331ef2d6cf7b76ed199a5dd689ee04469d795f87c8ab598a35a7de91"
+    "sha256": "a010bc501036d0226a198dbe9fa5faf0c6c74c9d3e6111a02070a907672a9309"
   },
   "latex/figures/00_framework.pdf": {
     "bytes": 92898,
@@ -284,8 +284,8 @@
     "sha256": "418b5b177bcce2ed976b274776f11a0abdf50053d03d40d64d3897233e9acdf1"
   },
   "latex/sections/conclusions.tex": {
-    "bytes": 1681,
-    "sha256": "0c041adcca4b6673968e3c4c86ca22cabf3b6783c38a34fff637be90f17ecf3e"
+    "bytes": 1897,
+    "sha256": "f10e489e42c4fbf29c4e9f71d75a194801a2879590f1e692cdc4950080a04aff"
   },
   "latex/sections/declarations.tex": {
     "bytes": 2718,
@@ -296,20 +296,20 @@
     "sha256": "fc12a9e84f943d0f0d9a4a1c24bf1c6413dbe9eb5e9529a5d79387064ef83f4e"
   },
   "latex/sections/introduction.tex": {
-    "bytes": 9139,
-    "sha256": "0a7af2fc37d668ae72085620b51f9fe90a9e4996b5e586eea5d4edc1447a6a4f"
+    "bytes": 12037,
+    "sha256": "b323efc526887aa1f876fe3b283c3555bbfc8858d2df0f69dd3e09651c38243a"
   },
   "latex/sections/methods.tex": {
-    "bytes": 24044,
-    "sha256": "11a0160233d314431a083e2005b1103e16c605425fab3e51204e5e787bdfd02a"
+    "bytes": 20529,
+    "sha256": "87b76063034804b51caaa8581392264177ce9ec449747645710d691715f61402"
   },
   "latex/sections/nomenclature.tex": {
     "bytes": 2379,
     "sha256": "0d59759b14a1c31fcfa61c6a960651d53510f01c18209b59b5ca03b38a5b96ed"
   },
   "latex/sections/results.tex": {
-    "bytes": 16822,
-    "sha256": "39a3816cfa657ed99aece4aa0f70fbeb8cfb65aadc423d570e145a147eeb4cc9"
+    "bytes": 15352,
+    "sha256": "8aba7d9290e9867dc0238e05ab8eb084761f46d70b75204149e24562c5145e61"
   },
   "latex/supplement/build_tables.py": {
     "bytes": 18255,
@@ -416,8 +416,8 @@
     "sha256": "751b7f04fadc6ddf882a7ebde298361ed88e0d71f0ed1e24bc272711ff4ff30a"
   },
   "manifests/release_assets.json": {
-    "bytes": 1312,
-    "sha256": "7982cadd1f8ce34e6216ecf32ee1fe669d6afd256ce288ebb94f471deae904b4"
+    "bytes": 1339,
+    "sha256": "f688082911abac31aacf94e77e041a0aad96d985409e13c979a8b3935b7b313a"
   },
   "manifests/research_files.json": {
     "bytes": 105053,
