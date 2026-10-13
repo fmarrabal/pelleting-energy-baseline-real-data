@@ -1,0 +1,40 @@
+\begin{table}[!htbp]\centering\scriptsize
+\caption{The 32 source fields of the plant workbook, their analytical names, role in the study, availability at the prediction origin, number of missing values in the source and cells matched in the fidelity reconciliation.}\label{tab:s_variables}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.16\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}>{\raggedright\arraybackslash}p{.15\linewidth}>{\raggedright\arraybackslash}Xrr@{}}\toprule
+Source field & Analytical name & Role & Availability at origin & Missing & Matched \\\midrule
+\texttt{DES\_\allowbreak{}PRODUCTO\_\allowbreak{}TIPO} & \texttt{salida\_\allowbreak{}programada} & model input & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{N\_\allowbreak{}BACHES\_\allowbreak{}DOS} & \texttt{baches\_\allowbreak{}dosificacion} & model input & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{PESO DOS (kg)} & \texttt{masa\_\allowbreak{}dosificada\_\allowbreak{}kg} & model input & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{PELLT} & \texttt{linea} & model input & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{CANTIDAD\_\allowbreak{}BACHES\_\allowbreak{}PEL} & \texttt{baches\_\allowbreak{}peletizado} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{CANT PELETIZADA} & \texttt{produccion\_\allowbreak{}t\_\allowbreak{}asumida} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{KWH PELET} & \texttt{energia\_\allowbreak{}peletizado\_\allowbreak{}kWh} & target & after origin & 0 & 2,745/2,745 \\
+\texttt{PRESION VAPOR (psi)} & \texttt{presion\_\allowbreak{}vapor\_\allowbreak{}psig} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{VAPOR (Lb)} & \texttt{masa\_\allowbreak{}vapor\_\allowbreak{}lb} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{TEMP\_\allowbreak{}ACONDICIONADOR} & \texttt{temperatura\_\allowbreak{}acond\_\allowbreak{}C} & op. summary (unused) & after origin / undocumented & 7 & 2,745/2,745 \\
+\texttt{AMPERAJE\_\allowbreak{}PEL} & \texttt{corriente\_\allowbreak{}peletizado\_\allowbreak{}A} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{FEC\_\allowbreak{}INI\_\allowbreak{}PEL\_\allowbreak{}TS} & \texttt{inicio\_\allowbreak{}peletizado} & chronology: origin & event observation & 2 & 2,745/2,745 \\
+\texttt{FEC\_\allowbreak{}FIN\_\allowbreak{}PEL\_\allowbreak{}TS} & \texttt{fin\_\allowbreak{}peletizado} & chronology: labels & after origin & 2 & 2,745/2,745 \\
+\texttt{N\_\allowbreak{}BACHES\_\allowbreak{}MOL} & \texttt{baches\_\allowbreak{}molienda} & op. summary (unused) & after origin / undocumented & 2 & 2,745/2,745 \\
+\texttt{FEC\_\allowbreak{}INI\_\allowbreak{}MOL} & \texttt{inicio\_\allowbreak{}molienda} & chronology: origin & event observation & 2 & 2,745/2,745 \\
+\texttt{FEC\_\allowbreak{}FIN\_\allowbreak{}MOL} & \texttt{fin\_\allowbreak{}molienda} & chronology: labels & after origin & 2 & 2,745/2,745 \\
+\texttt{KWH MOL} & \texttt{energia\_\allowbreak{}molienda\_\allowbreak{}kWh} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{TEMP\_\allowbreak{}DEVANADO} & \texttt{temperatura\_\allowbreak{}devanado\_\allowbreak{}C} & op. summary (unused) & after origin / undocumented & 5 & 2,745/2,745 \\
+\texttt{TEMP\_\allowbreak{}ROD\_\allowbreak{}DELANTERO} & \texttt{temperatura\_\allowbreak{}rod\_\allowbreak{}del\_\allowbreak{}C} & op. summary (unused) & after origin / undocumented & 5 & 2,745/2,745 \\
+\texttt{TEMP\_\allowbreak{}ROD\_\allowbreak{}TRASERO} & \texttt{temperatura\_\allowbreak{}rod\_\allowbreak{}tras\_\allowbreak{}C} & op. summary (unused) & after origin / undocumented & 5 & 2,745/2,745 \\
+\texttt{AMPERAJE\_\allowbreak{}MOL} & \texttt{corriente\_\allowbreak{}molienda\_\allowbreak{}A} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{N\_\allowbreak{}BACHES\_\allowbreak{}MEZ} & \texttt{baches\_\allowbreak{}mezclado} & op. summary (unused) & after origin / undocumented & 2 & 2,745/2,745 \\
+\texttt{FEC\_\allowbreak{}INI\_\allowbreak{}MEZ} & \texttt{inicio\_\allowbreak{}mezclado} & chronology: origin & event observation & 2 & 2,745/2,745 \\
+\texttt{FEC\_\allowbreak{}FIN\_\allowbreak{}MEZ} & \texttt{fin\_\allowbreak{}mezclado} & chronology: labels & after origin & 2 & 2,745/2,745 \\
+\texttt{KWH MEZ} & \texttt{energia\_\allowbreak{}mezclado\_\allowbreak{}kWh} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{AMPERAJE\_\allowbreak{}MEZ} & \texttt{corriente\_\allowbreak{}mezclado\_\allowbreak{}A} & op. summary (unused) & after origin / undocumented & 0 & 2,745/2,745 \\
+\texttt{UNIDADINVENTARIO} & \texttt{unidad\_\allowbreak{}inventario} & context (unused) & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{AGRUPACION\_\allowbreak{}INVENTARIO} & \texttt{grupo\_\allowbreak{}inventario} & context (unused) & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{LINEA} & \texttt{familia} & context (unused) & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{SUBLINEA} & \texttt{subfamilia} & model input & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{PRESENTACION} & \texttt{forma} & model input & not verified before origin & 0 & 2,745/2,745 \\
+\texttt{EMPAQUE} & \texttt{empaque\_\allowbreak{}final} & context (unused) & not verified before origin & 0 & 2,745/2,745 \\
+\bottomrule
+\end{tabularx}
+\par\vspace{3pt}\footnotesize Original Spanish field names are retained for traceability. Model inputs are admitted for the retrospective baseline; prospective use would require a plan version and a timestamp before the origin. The fidelity reconciliation compared every cell of the analytical table with the workbook under the documented tolerances: 32 fields $\times$ 2,745 records = 87,840 comparisons, all matched.
+\end{table}

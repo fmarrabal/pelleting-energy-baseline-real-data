@@ -1,0 +1,156 @@
+\section{Materials and methods}\label{sec:methods}
+\subsection{Study design}
+This is a retrospective, observational model-development study on the recorded operations of three industrial feed-pelleting lines. The quantity estimated is the expected electricity of a completed operation, not a continuously sampled power signal, and the observational unit is one row of the plant database. In the primary evaluation, models are developed and selected on temporally ordered validation periods; the selected model is then frozen, evaluated against operational reference baselines in a later test period, and assessed for predictive performance and interval coverage overall and by line. A set of complementary analyses looks at short histories of completed same-line operations with locally trained temporal architectures and pretrained time-series models, at line- and product-specific mass interactions, at a recent-residual correction, at rolling updates of the interval widths and at the numerical agreement between computational implementations. None of them replaces the frozen model. Figure~\ref{fig:workflow} summarizes the workflow.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.82\textwidth,trim=0 2.5cm 0 0,clip]{figures/13_DiagramaFlujoProced.pdf}
+\caption{Methodological workflow. The primary evaluation comprises chronological model development, frozen test evaluation and line-specific assessment; the complementary analyses examine short-context temporal models, line- and product-specific interactions, recent-residual correction, rolling interval updates and computational diagnostics.}
+\label{fig:workflow}
+\end{figure}
+
+\subsection{Industrial records and observational unit}
+The plant workbook holds 2,745 records and 32 named variables from three lines: 730 from Pellet~1, 1,148 from Pellet~2 and 867 from Pellet~3, with recorded stage starts from 2 January to 1 April 2025 and the last pelleting completion on 2 April. The plant information system generated each row as a consolidated record of one production operation: dosed mass, dosing-batch count, product classifications, stage timestamps, pelleting electrical energy (\texttt{KWH PELET}), steam-related variables and operational summaries. There is no verified production-order identifier linking every stage to a single physical batch and no separate meter history from which the energy value could be reconstructed, so a ``recorded production operation'' is one row of the workbook, and source-row identifiers are preserved throughout. Records with overlapping timestamps were kept when their identifiers differed, because overlap alone is no evidence of duplication; overlaps are characterized by line and treated as a data-quality descriptor.
+
+\subsection{Target, predictors and preprocessing}
+The response $y_i$ is \texttt{KWH PELET}, the electrical energy attributed to pelleting record $i$ in kWh; it excludes the separately recorded electricity of milling and mixing and the thermal energy supplied as steam. Dosed mass $m_i$ comes from \texttt{PESO DOS (kg)} converted to tonnes. Energy, a duration-based average-power proxy and specific energy consumption are defined as
+\begin{equation}
+ E_i=y_i\;[\mathrm{kWh}],\qquad
+ P_i^{\mathrm{avg}}=\frac{y_i}{\Delta_i}\;[\mathrm{kW}],\qquad
+ \mathrm{SEC}_i=\frac{y_i}{m_i}\;[\mathrm{kWh/t}],
+ \label{eq:units}
+\end{equation}
+where $\Delta_i$ is the recorded pelleting duration in hours. $P_i^{\mathrm{avg}}$ is derived, not measured; $E_i$ is the modelling target and SEC is used only to build the reference baselines.
+
+The analytical origin $t_i$ is the earliest recorded start among milling, mixing and pelleting; it assigns records to partitions and decides whether a historical outcome was completed before a target. The predictors are dosed mass, dosing-batch count, pelleting line, product subfamily, presentation, bag/bulk category, origin hour and origin weekday (Table~\ref{tab:inputs}). With $b_i$ the number of dosing batches, $h_i$ the origin hour and $d_i\in\{0,\ldots,6\}$ the weekday from Monday, the numerical input vector is
+\begin{equation}
+ x_i^{\mathrm{num}}=\left(m_i,b_i,\sin\frac{2\pi h_i}{24},\cos\frac{2\pi h_i}{24},
+ \sin\frac{2\pi d_i}{7},\cos\frac{2\pi d_i}{7}\right).
+ \label{eq:inputs}
+\end{equation}
+
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Model inputs: source fields, preprocessing, recorded support and conditions for prospective use. Original Spanish field names are retained for traceability; counts and ranges refer to all 2,745 source records.}\label{tab:inputs}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.15\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{.21\linewidth}@{}}\toprule
+Input / units & Source field and preprocessing & Interpretation and recorded support & Prospective use \\\midrule
+Dosed mass $m_i$ / t & \texttt{PESO DOS (kg)}; divided by 1,000 & Material entering the operation; 2.69--36.78 t, median 14.98 t; the mass denominator used throughout & Possible if the mass is available at the intended origin \\\addlinespace
+Dosing batches $b_i$ / count & \texttt{N\_BACHES\_DOS}; numerical & One to ten, median five; describes how the mass is aggregated and is correlated with it; not a physical-cycle identifier & Possible when the batch plan or completed count is available \\\addlinespace
+Pelleting line $\ell_i$ / category & \texttt{PELLT}; one-hot & Pellet~1, 2 and 3: 730, 1,148 and 867 records; the separate field \texttt{LINEA} holds product families & Possible when the line assignment is confirmed \\\addlinespace
+Product subfamily $c_i$ / category & \texttt{SUBLINEA}; one-hot & Nine labels spanning poultry, swine, cattle, equine and rabbit products; a classification, not a measured formulation & Possible when the product classification is known \\\addlinespace
+Presentation $p_i$ / category & \texttt{PRESENTACION}; one-hot & \texttt{PELETIZADO} (pelleted): 2,065; \texttt{CROMBELIZADO} (crumbled): 680; may also reflect product allocation & Possible when the presentation is known \\\addlinespace
+Bag/bulk $s_i$ / category & \texttt{DES\_PRODUCTO\_}\allowbreak\texttt{TIPO}; one-hot & \texttt{ENSAQUE} (bagged): 2,420; \texttt{GRANEL} (bulk): 325; the analytical alias \texttt{salida\_programada} identifies output form, not a departure time & Possible when the output form is known \\\addlinespace
+Origin hour / dimensionless pair & Earliest recorded stage start; sine and cosine & Two coordinates avoid a discontinuity between 23:59 and 00:00; seconds are not used & Available at or immediately after the origin \\\addlinespace
+Origin weekday / dimensionless pair & Same origin; sine and cosine & Two coordinates represent recurring weekly associations, not operational state & Available at the origin \\\bottomrule
+\end{tabularx}
+\end{table}
+
+The six numerical coordinates are standardized with training-data parameters only and the four categorical variables are one-hot encoded with training vocabularies, giving 22 columns in the Ridge design matrix; a level absent from a training period produces no active indicator. Grouped Ridge contributions therefore depend partly on this coding and are read as components of the fitted representation, not as invariant physical effects. The analysis is retrospective and conditional on the consolidated production characteristics of each operation: current-record durations, stage energies and the steam, temperature and current summaries are excluded as inputs because their availability at the origin cannot be established, and recorded pelleting completion is taken as the availability time of historical outcomes. A prospective implementation would have to restrict the model to descriptors verified as available at the intended origin.
+
+\subsection{Data integrity and temporal consistency}
+All 32 source fields were reconciled with the analytical table across the 2,745 records: the 87,840 cell-level comparisons satisfied the predefined numerical and whitespace tolerances. Three records (0.11\%) with \texttt{KWH PELET}=0 were excluded from supervised modelling, without imputation. Table~\ref{tab:quality} lists the main checks; the counts describe different characteristics of possibly the same records. Median pelleting durations are about 145, 96 and 123 minutes on Pellet~1, 2 and 3; milling completion falls after pelleting start in 528 records and mixing completion in 376. These patterns are characteristics of consolidated plant records rather than exclusion criteria. The workbook contains event-level summaries, not dense power trajectories or verified active/inactive labels; a separately supplied set of synthetic ten-second series was kept apart from the industrial evidence.
+
+\begin{table}[!htbp]\centering\small
+\caption{Data-integrity and temporal-consistency checks.}\label{tab:quality}
+\begin{tabularx}{\linewidth}{@{}XrX@{}}\toprule
+Check & Count & Analytical treatment \\\midrule
+Source records & 2,745 & Reconciled with the analytical table. \\
+Records with zero pelleting energy & 3 & Excluded from supervised targets; not imputed. \\
+Imputed auxiliary values & 15 & Retained in the source copy; affected variables were not model inputs. \\
+Within-line interval overlaps & 351 & Retained as distinct source records and characterized by pelleting line. \\
+Pellet~1 overlaps & 75 & Included in the line-level overlap count. \\
+Pellet~2 overlaps & 131 & Included in the line-level overlap count. \\
+Pellet~3 overlaps & 145 & Included in the line-level overlap count. \\
+Test records exceeding 24 hours & 5 & Retained in the primary test population. \\
+Pre-test eligibility exclusions & 25 & Fourteen development and eleven calibration candidates. \\\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Chronological evaluation design}
+Records are assigned by origin to development (before 22 February 2025), calibration (22 February to 5 March) and testing (from 6 March); the last operation completes on 2 April (Figure~\ref{fig:allocation}). Development and calibration eligibility require a positive outcome, a valid duration, complete inputs and completion before the next boundary, which retains 1,542 of 1,556 development candidates and 380 of 391 calibration candidates (the 25 exclusions of Table~\ref{tab:quality}); all 798 test candidates are retained, including the five operations longer than 24 hours.
+
+\fig{01_records_and_partitions}{allocation}{1}{Chronological allocation by pelleting line and partition. (a) Daily record counts for the three lines; background shading marks the development, calibration and frozen-test partitions, and dashed lines mark the development--calibration boundary on 22 February 2025 and the start of testing on 6 March 2025. Each record is counted by its earliest recorded stage start. (b) Dates, candidate records, exclusions and retained sample sizes of each partition.}
+
+Model development uses four expanding training blocks with validation weeks beginning on 25 January, 1 February, 8 February and 15 February 2025: training sizes 705, 924, 1,121 and 1,334, validation sizes 208, 187, 205 and 200, i.e.\ 800 common targets over 28 origin dates. Training outcomes must be completed before each validation period starts, and validation outcomes before the week ends, so that the expanding blocks remain separated. Assessment thus follows the direction in which the model would be used and keeps future outcomes out of both model fitting and historical contexts \citep{tashman2000,cerqueira2020,bergmeir2018,kapoor2023}.
+
+\subsection{Reference baselines and current-input models}
+With $\ell_i$ the line of operation $i$, the line-specific SEC reference estimates one energy intensity per line from training totals:
+\begin{equation}
+ \widehat{s}_\ell=\frac{\sum_{i\in\mathcal T:\ell_i=\ell}y_i}{\sum_{i\in\mathcal T:\ell_i=\ell}m_i},
+ \qquad \widehat y_i^{\mathrm{SEC}}=m_i\widehat s_{\ell_i}.
+ \label{eq:sec}
+\end{equation}
+A line-specific median-energy reference and a recent-SEC reference (median of the last five completed same-line energy-to-mass ratios, updated as outcomes arrive during validation) complete the set of operational references. With $z_i$ the transformed current-record inputs, Ridge regression estimates an unpenalized intercept and regularized coefficients,
+\begin{equation}
+ (\widehat b,\widehat\beta)=\argmin_{b,\beta}
+ \left\{\sum_{i\in\mathcal T}(y_i-b-z_i^\top\beta)^2+10\|\beta\|_2^2\right\},
+ \qquad \widehat y_i=\max(0,\widehat b+z_i^\top\widehat\beta),
+ \label{eq:ridge}
+\end{equation}
+where the non-negative truncation prevents negative energy estimates without imposing a process-energy balance. ExtraTrees (250 trees, minimum leaf size five), histogram gradient boosting (200 iterations, seven leaves, learning rate 0.05, minimum leaf size 20, regularization 10) and a multilayer perceptron (hidden layers of 32 and 16 units, Adam, regularization 0.1, at most 800 iterations, seeds 11, 29 and 47 averaged) use the same inputs with configurations held constant across validation blocks; the tree methods use seed 2026. We evaluated these particular implementations; no attempt was made to optimize each family exhaustively. When Ridge and gradient boosting gave practically the same development MAE, Ridge was chosen for parsimony, stability and record-level traceability, and the selected model and its interval calibration were frozen before any test record was evaluated.
+
+For interpretation, the 22 design columns are assigned to eight groups (dosed mass, batch count, hour, weekday, line, subfamily, presentation, bag/bulk), so that the untruncated estimate and the contribution of group $g$ are
+\begin{equation}
+ f_i^{\mathrm{Ridge}}=\widehat b+\sum_{g\in\mathcal G}C_{ig},\qquad
+ C_{ig}=\sum_{k\in g}z_{ik}\widehat\beta_k,\qquad
+ \widehat y_i=\max(0,f_i^{\mathrm{Ridge}}).
+ \label{eq:explain}
+\end{equation}
+The grouped contributions preserve the arithmetic of the fitted model; they describe how the encoded variables build an estimate, not separate physical energy uses or causal effects \citep{rudin2019,aas2021,fisher2019}.
+
+\subsection{Short-context temporal models on irregular operational events}
+The temporal comparison asks a simple question: do histories of completed same-line operations add information beyond the current-record covariates? Each eligible target receives the 16 most recent completed records from the same line and validation interval,
+\begin{equation}
+ \mathcal H_i^{(16)}=\operatorname{last}_{16,(a_j,j)}
+ \{j:\ell_j=\ell_i,\ t_j\in\mathcal P,\ a_j<t_i,\ a_j<\sup\mathcal P\},
+ \label{eq:window}
+\end{equation}
+where $a_j$ is the recorded completion time and ties are broken by source row; an operation that started earlier but was not complete at the target origin cannot enter the context. The window retains 584 of the 800 development targets (149, 257 and 178 from Pellet~1, 2 and 3 over 21 origin dates). Contexts restart at the weekly validation boundaries; completed outcomes may inform later targets within the week but never update fitted parameters. Figure~\ref{fig:windows} shows the design and one observed context.
+
+\fig{07_windows}{windows}{1}{Short-context temporal evaluation. (a) Expanding training blocks and weekly validation blocks; green bars mark the outer validation weeks, and each training bar reports the earlier training / preceding-week validation counts used for epoch selection. (b) An observed context of 16 completed same-line operations for target row 823 on Pellet~1, ordered by completion; segments span recorded pelleting start and finish, dots mark completion, and every donor outcome precedes the target origin on 28 January at 04:24.}
+
+Two Ridge controls separate historical information from model capacity: one uses the current covariates only, the other appends the 16 historical covariate vectors and their energies, keeping the penalty of 10. TFT and N-HiTS receive the same information through their NeuralForecast implementations \citep{nixtlatft,nixtlanhits}; TFT uses hidden size 32, four heads and dropout 0.1, N-HiTS three blocks of two 64-unit layers with pooling 2, 2, 1. Each uses seeds 11, 29 and 47 with an inner validation week before each outer week for epoch selection (Adam at $10^{-3}$, weight decay $10^{-4}$, batch 64, gradient clipping 1, at most 40 epochs, patience 8); each seed is refitted on the full outer-training block for its selected epochs and the three clipped predictions are averaged. TimesFM~2.5 runs zero-shot with its frozen 200M checkpoint, alone and with its XReg adapter (ridge 10, one call per origin so that no query pools labels from another query's future) \citep{das2024,timesfm25,timesfmrepo}; Chronos-2 runs with energy-only and native covariate inputs, median forecast, cross-query learning disabled \citep{ansari2025,chronosrepo}. All variants are evaluated on the same 584 targets, so the comparison concerns these short-context implementations on irregular pelleting events, not the model families in general \citep{aksu2024,zeng2023}.
+
+\subsection{Post-hoc extensions}
+Three extensions turn patterns noticed during development into hypotheses for later periods. H1 lets the mass association vary by line, and H2 by product subfamily, through the untruncated predictor
+\begin{equation}
+ f_i=b+z_i^\top\beta+z_{m,i}\sum_{c\in\mathcal C}\gamma_c\ind(g_i=c),
+ \label{eq:interaction}
+\end{equation}
+with grouping variable $g_i$, the same penalty and training-only transformations. H3 corrects the frozen estimate with up to 20 recent same-line residuals $e_j=y_j-\widehat y_j^{\mathrm{Ridge}}$ of completed operations, ordered by completion and source row; with $n_i=|\mathcal H_i|$,
+\begin{equation}
+ \delta_i=\begin{cases}
+ \displaystyle\frac{n_i}{n_i+10}\frac{1}{n_i}\sum_{j\in\mathcal H_i}e_j,&n_i\ge5,\\
+ 0,&n_i<5,
+ \end{cases}
+ \qquad \widehat y_i^{\mathrm{H3}}=\max(0,\widehat y_i^{\mathrm{Ridge}}+\delta_i).
+ \label{eq:bias}
+\end{equation}
+H1--H3 are exploratory development analyses; they do not replace the frozen model.
+
+\subsection{Residual intervals and performance metrics}
+Absolute errors on the 380 calibration records calibrate the intervals of the frozen model. For miscoverage level $\alpha$,
+\begin{equation}
+ q_\alpha=r_{(\lceil(n_{\mathrm{cal}}+1)(1-\alpha)\rceil)},\qquad
+ r_j=|y_j-\widehat y_j|,\qquad
+ I_i^{1-\alpha}=[\max(0,\widehat y_i-q_\alpha),\widehat y_i+q_\alpha],
+ \label{eq:interval}
+\end{equation}
+giving half-widths of 93.01 and 132.96~kWh at the 90\% and 95\% levels. They are called residual intervals because the industrial sequence is not assumed exchangeable; they are judged empirically by coverage, mean width and interval score, globally and by line. A post-hoc rolling policy recomputes the quantile from the latest 200 available absolute errors, starting from the calibration residuals and admitting a test residual only once the completion of its operation precedes the target origin ($a_j<t_i$); it is an exploratory comparator, not a validated improvement \citep{xu2021,zaffran2022,gibbs2024}.
+
+Point performance is measured by
+\begin{align}
+ \mathrm{MAE}&=N^{-1}\sum_i|\widehat y_i-y_i|,&
+ \mathrm{RMSE}&=\sqrt{N^{-1}\sum_i(\widehat y_i-y_i)^2},\\
+ \mathrm{Bias}&=N^{-1}\sum_i(\widehat y_i-y_i),&
+ \mathrm{WAPE}&=\frac{\sum_i|\widehat y_i-y_i|}{\sum_i y_i},
+\end{align}
+with MAE as the selection criterion \citep{hyndman2006}. Intervals are assessed by coverage, mean width and the interval score \citep{gneiting2007},
+\begin{equation}
+ \mathrm{IS}_\alpha(L,U;y)=(U-L)+\frac{2}{\alpha}(L-y)\ind(y<L)
+                  +\frac{2}{\alpha}(y-U)\ind(y>U),
+ \label{eq:is}
+\end{equation}
+and each completed operation yields a signed excess $r_i^{\mathrm{excess}}=y_i-\widehat y_i$ and an out-of-interval flag $B_i=\ind\{y_i<L_i\ \text{or}\ y_i>U_i\}$ that mark candidates for review without identifying the physical cause. Paired differences use a circular block bootstrap over observed origin dates (blocks of three dates, all lines of a date together; 3,000 replicates for the test comparison, 5,000 for the exploratory ones), with Bonferroni-adjusted 98.33\% intervals for H1--H3 and 99.29\% intervals for the seven temporal contrasts alongside the marginal 95\% intervals.
+
+\subsection{Computational implementation}
+Ridge and the native JAX XReg solver ran on CPU; neural computations used float32 on an NVIDIA RTX PRO 5000 Blackwell GPU (48~GB) with TF32 disabled. TFT and N-HiTS were trained locally, whereas TimesFM and Chronos weights remained frozen. CPU--GPU numerical comparisons are reported in Appendix~\ref{sec:computing}.

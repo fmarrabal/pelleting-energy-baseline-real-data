@@ -1,0 +1,42 @@
+\section*{Nomenclature}
+\begingroup\small
+\noindent\begin{tabularx}{\linewidth}{@{}>{$}l<{$}X@{}}
+\multicolumn{2}{@{}l}{\textit{Symbols}}\\
+y_i,\ E_i & pelleting electrical energy of record $i$ (kWh) \\
+\widehat y_i & point estimate of $y_i$ (kWh) \\
+m_i & dosed mass of record $i$ (t) \\
+b_i & number of dosing batches of record $i$ \\
+\ell_i,\ c_i,\ p_i,\ s_i & pelleting line, product subfamily, presentation and bag/bulk category of record $i$ \\
+h_i,\ d_i & origin hour (h) and weekday (0--6) of record $i$ \\
+t_i & analytical origin of record $i$: earliest recorded stage start \\
+a_j & recorded pelleting completion of record $j$ \\
+\Delta_i & recorded pelleting duration of record $i$ (h) \\
+P_i^{\mathrm{avg}} & duration-based average-power proxy of record $i$ (kW) \\
+z_i & standardized and one-hot encoded input vector of record $i$ \\
+\widehat b,\ \widehat\beta & fitted intercept and coefficient vector of the Ridge model \\
+\widehat s_\ell & training-period specific energy consumption of line $\ell$ (kWh/t) \\
+\mathcal T,\ \mathcal P & training set and partition interval \\
+\mathcal H_i^{(16)},\ \mathcal H_i & 16-record operating history and recent-residual history of target $i$ \\
+C_{ig} & contribution of variable group $g$ to the estimate of record $i$ (kWh) \\
+\delta_i & shrunk recent-residual correction (kWh) \\
+q_\alpha & calibrated half-width at miscoverage level $\alpha$ (kWh) \\
+L_i,\ U_i & lower and upper interval limits of record $i$ (kWh) \\
+r_i^{\mathrm{excess}},\ B_i & signed excess over the estimate (kWh) and out-of-interval flag \\
+\end{tabularx}
+
+\medskip
+\noindent\begin{tabularx}{\linewidth}{@{}lX@{}}
+\multicolumn{2}{@{}l}{\textit{Abbreviations}}\\
+EnB, EnPI & energy baseline, energy performance indicator \\
+IPMVP & International Performance Measurement and Verification Protocol \\
+MAE, RMSE, WAPE & mean absolute error, root mean squared error, weighted absolute percentage error \\
+IS & interval score \\
+MLP & multilayer perceptron \\
+SEC & specific energy consumption (kWh/t) \\
+TFT & Temporal Fusion Transformer \\
+N-HiTS & Neural Hierarchical Interpolation for Time Series \\
+XReg & covariate-regression adapter of TimesFM \\
+H1, H2, H3 & post-hoc extensions: line-dependent mass effect, product-dependent mass effect, recent-residual correction \\
+GPU, CPU & graphics and central processing unit \\
+\end{tabularx}
+\endgroup

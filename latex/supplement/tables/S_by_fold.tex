@@ -1,0 +1,39 @@
+\begin{table}[!htbp]\centering\scriptsize
+\caption{Matched temporal benchmark by outer validation week (584 targets in total). MAE, RMSE and bias in kWh per record; the last column counts raw predictions below zero before clipping.}\label{tab:s_by_fold}
+\begin{tabular}{@{}llrrrrrr@{}}\toprule
+Method & Week & $n$ & MAE & RMSE & Bias & WAPE (\%) & Neg. \\\midrule
+Ridge, current inputs & 2025-01-25 & 151 & 52.30 & 76.40 & $-11.79$ & 19.54 & 0 \\
+Ridge, current inputs & 2025-02-01 & 133 & 63.80 & 90.73 & $-7.07$ & 23.01 & 0 \\
+Ridge, current inputs & 2025-02-08 & 151 & 49.89 & 65.99 & $-9.12$ & 19.04 & 0 \\
+Ridge, current inputs & 2025-02-15 & 149 & 49.36 & 74.64 & 8.99 & 20.05 & 0 \\
+Ridge, full 16-record window & 2025-01-25 & 151 & 67.20 & 85.32 & $-8.06$ & 25.11 & 0 \\
+Ridge, full 16-record window & 2025-02-01 & 133 & 74.56 & 99.17 & 3.89 & 26.89 & 1 \\
+Ridge, full 16-record window & 2025-02-08 & 151 & 57.26 & 72.77 & $-8.64$ & 21.85 & 1 \\
+Ridge, full 16-record window & 2025-02-15 & 149 & 57.96 & 86.21 & 7.89 & 23.55 & 0 \\
+TFT & 2025-01-25 & 151 & 52.28 & 79.77 & $-23.90$ & 19.53 & 0 \\
+TFT & 2025-02-01 & 133 & 62.73 & 93.12 & $-8.50$ & 22.62 & 0 \\
+TFT & 2025-02-08 & 151 & 50.59 & 67.02 & $-15.51$ & 19.31 & 0 \\
+TFT & 2025-02-15 & 149 & 50.04 & 76.06 & 3.52 & 20.33 & 0 \\
+N-HiTS & 2025-01-25 & 151 & 75.99 & 104.45 & $-22.10$ & 28.39 & 1 \\
+N-HiTS & 2025-02-01 & 133 & 73.23 & 105.89 & 7.23 & 26.41 & 0 \\
+N-HiTS & 2025-02-08 & 151 & 55.86 & 71.81 & $-0.14$ & 21.32 & 0 \\
+N-HiTS & 2025-02-15 & 149 & 56.88 & 85.37 & 4.13 & 23.11 & 0 \\
+Chronos-2 + covariates & 2025-01-25 & 151 & 93.58 & 132.60 & $-9.89$ & 34.97 & 0 \\
+Chronos-2 + covariates & 2025-02-01 & 133 & 95.82 & 134.05 & $-17.07$ & 34.55 & 0 \\
+Chronos-2 + covariates & 2025-02-08 & 151 & 76.22 & 107.60 & $-5.14$ & 29.09 & 0 \\
+Chronos-2 + covariates & 2025-02-15 & 149 & 77.61 & 107.81 & $-1.32$ & 31.53 & 0 \\
+TimesFM 2.5, energy only & 2025-01-25 & 151 & 106.47 & 143.48 & $-4.31$ & 39.78 & 0 \\
+TimesFM 2.5, energy only & 2025-02-01 & 133 & 99.91 & 139.87 & $-17.75$ & 36.03 & 0 \\
+TimesFM 2.5, energy only & 2025-02-08 & 151 & 86.53 & 117.84 & $-13.66$ & 33.02 & 0 \\
+TimesFM 2.5, energy only & 2025-02-15 & 149 & 93.05 & 120.75 & $-2.09$ & 37.80 & 0 \\
+Chronos-2, energy only & 2025-01-25 & 151 & 110.41 & 149.51 & $-11.69$ & 41.25 & 0 \\
+Chronos-2, energy only & 2025-02-01 & 133 & 106.11 & 146.84 & $-14.29$ & 38.27 & 0 \\
+Chronos-2, energy only & 2025-02-08 & 151 & 91.41 & 124.92 & $-14.48$ & 34.88 & 0 \\
+Chronos-2, energy only & 2025-02-15 & 149 & 92.79 & 123.63 & $-6.20$ & 37.70 & 0 \\
+TimesFM 2.5 + XReg & 2025-01-25 & 151 & 235.92 & 1256.28 & 143.41 & 88.15 & 0 \\
+TimesFM 2.5 + XReg & 2025-02-01 & 133 & 81.20 & 119.73 & $-26.73$ & 29.28 & 0 \\
+TimesFM 2.5 + XReg & 2025-02-08 & 151 & 59.70 & 83.81 & $-10.57$ & 22.78 & 0 \\
+TimesFM 2.5 + XReg & 2025-02-15 & 149 & 67.39 & 96.30 & $-0.91$ & 27.38 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}

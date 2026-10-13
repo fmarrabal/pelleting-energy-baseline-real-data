@@ -1,0 +1,33 @@
+﻿campo_excel,campo_analitico,rol,disponibilidad,regla,ausentes_original
+DES_PRODUCTO_TIPO,salida_programada,entrada_modelo_original,no_acreditada_antes_del_origen,Admitida en linea base retrospectiva. Para pronostico se requiere version del plan y sello previo.,0
+N_BACHES_DOS,baches_dosificacion,entrada_modelo_original,no_acreditada_antes_del_origen,Admitida en linea base retrospectiva. Para pronostico se requiere version del plan y sello previo.,0
+PESO DOS (kg),masa_dosificada_kg,entrada_modelo_original,no_acreditada_antes_del_origen,Admitida en linea base retrospectiva. Para pronostico se requiere version del plan y sello previo.,0
+PELLT,linea,entrada_modelo_original,no_acreditada_antes_del_origen,Admitida en linea base retrospectiva. Para pronostico se requiere version del plan y sello previo.,0
+CANTIDAD_BACHES_PEL,baches_peletizado,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+CANT PELETIZADA,produccion_t_asumida,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+KWH PELET,energia_peletizado_kWh,objetivo,posterior,No imputar. Disponibilidad >= fin peletizado; falta sello de publicacion.,0
+PRESION VAPOR (psi),presion_vapor_psig,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+VAPOR (Lb),masa_vapor_lb,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+TEMP_ACONDICIONADOR,temperatura_acond_C,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,7
+AMPERAJE_PEL,corriente_peletizado_A,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+FEC_INI_PEL_TS,inicio_peletizado,cronologia,observacion_del_evento,Origen historico = minimo de inicios disponibles. No usar inicio futuro de otra etapa como predictor.,2
+FEC_FIN_PEL_TS,fin_peletizado,cronologia_etiquetas,posterior,Solo para purga y llegada de etiquetas. Fin no prueba disponibilidad inmediata.,2
+N_BACHES_MOL,baches_molienda,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,2
+FEC_INI_MOL,inicio_molienda,cronologia,observacion_del_evento,Origen historico = minimo de inicios disponibles. No usar inicio futuro de otra etapa como predictor.,2
+FEC_FIN_MOL,fin_molienda,cronologia_etiquetas,posterior,Solo para purga y llegada de etiquetas. Fin no prueba disponibilidad inmediata.,2
+KWH MOL,energia_molienda_kWh,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+TEMP_DEVANADO,temperatura_devanado_C,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,5
+TEMP_ROD_DELANTERO,temperatura_rod_del_C,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,5
+TEMP_ROD_TRASERO,temperatura_rod_tras_C,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,5
+AMPERAJE_MOL,corriente_molienda_A,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+N_BACHES_MEZ,baches_mezclado,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,2
+FEC_INI_MEZ,inicio_mezclado,cronologia,observacion_del_evento,Origen historico = minimo de inicios disponibles. No usar inicio futuro de otra etapa como predictor.,2
+FEC_FIN_MEZ,fin_mezclado,cronologia_etiquetas,posterior,Solo para purga y llegada de etiquetas. Fin no prueba disponibilidad inmediata.,2
+KWH MEZ,energia_mezclado_kWh,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+AMPERAJE_MEZ,corriente_mezclado_A,resumen_operacional_no_usado,posterior_o_no_documentada,Excluir de prediccion previa; no hay trayectoria ni sello de captura.,0
+UNIDADINVENTARIO,unidad_inventario,contexto_no_usado,no_acreditada_antes_del_origen,No confundir clasificacion final con plan conocido.,0
+AGRUPACION_INVENTARIO,grupo_inventario,contexto_no_usado,no_acreditada_antes_del_origen,No confundir clasificacion final con plan conocido.,0
+LINEA,familia,contexto_no_usado,no_acreditada_antes_del_origen,No confundir clasificacion final con plan conocido.,0
+SUBLINEA,subfamilia,entrada_modelo_original,no_acreditada_antes_del_origen,Admitida en linea base retrospectiva. Para pronostico se requiere version del plan y sello previo.,0
+PRESENTACION,forma,entrada_modelo_original,no_acreditada_antes_del_origen,Admitida en linea base retrospectiva. Para pronostico se requiere version del plan y sello previo.,0
+EMPAQUE,empaque_final,contexto_no_usado,no_acreditada_antes_del_origen,No confundir clasificacion final con plan conocido.,0

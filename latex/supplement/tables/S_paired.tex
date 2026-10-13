@@ -1,0 +1,15 @@
+\begin{table}[!htbp]\centering\footnotesize
+\caption{Paired MAE differences relative to current-input Ridge on the 584 matched targets (positive values would favour the alternative): marginal 95\% and family-adjusted 99.29\% block-bootstrap intervals for the seven contrasts (5,000 replicates, blocks of three observed origin dates, seed 20260922), and the 95\% interval of each method's own MAE.}\label{tab:s_paired}
+\begin{tabular}{@{}lrlll@{}}\toprule
+Method & Improvement (kWh) & 95\% interval & 99.29\% interval & MAE 95\% interval \\\midrule
+Ridge, current inputs & 0.000 & [0.000, 0.000] & [0.000, 0.000] & [48.77, 59.01] \\
+Ridge, full 16-record window & $-10.403$ & [$-13.435$, $-7.635$] & [$-14.518$, $-6.804$] & [57.37, 70.88] \\
+TFT & $-0.105$ & [$-2.199$, 2.318] & [$-2.914$, 3.325] & [49.50, 58.55] \\
+N-HiTS & $-11.733$ & [$-19.077$, $-6.789$] & [$-21.922$, $-5.809$] & [57.76, 74.67] \\
+Chronos-2 + covariates & $-31.981$ & [$-38.087$, $-27.675$] & [$-41.104$, $-26.922$] & [79.03, 93.31] \\
+TimesFM 2.5, energy only & $-42.852$ & [$-50.175$, $-36.525$] & [$-53.336$, $-35.112$] & [90.10, 104.11] \\
+Chronos-2, energy only & $-46.477$ & [$-54.303$, $-40.813$] & [$-57.634$, $-39.515$] & [93.14, 108.92] \\
+TimesFM 2.5 + XReg & $-58.576$ & [$-152.154$, $-14.414$] & [$-203.361$, $-11.970$] & [67.58, 205.10] \\
+\bottomrule
+\end{tabular}
+\end{table}

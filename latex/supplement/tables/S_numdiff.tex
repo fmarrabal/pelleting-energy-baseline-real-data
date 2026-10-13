@@ -1,0 +1,15 @@
+\begin{table}[!htbp]\centering\small
+\caption{Absolute CPU--GPU prediction differences per method over the 584 matched targets (kWh).}\label{tab:s_numdiff}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Method & Mean & Maximum & Median \\\midrule
+Ridge, current inputs & 0.000000 & 0.000000 & 0.000000 \\
+Ridge, full 16-record window & 0.000000 & 0.000000 & 0.000000 \\
+TFT & 9.431759 & 56.837992 & 8.269961 \\
+N-HiTS & 9.881184 & 47.780848 & 6.692332 \\
+Chronos-2 + covariates & 2.386194 & 57.041779 & 0.859741 \\
+TimesFM 2.5, energy only & 0.000014 & 0.000092 & 0.000000 \\
+Chronos-2, energy only & 0.000015 & 0.000183 & 0.000000 \\
+TimesFM 2.5 + XReg & 0.000007 & 0.000061 & 0.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}

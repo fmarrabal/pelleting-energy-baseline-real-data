@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this archive, cite the manuscript below and this versioned release."
+title: "Explainable production-adjusted electrical-energy baselines for industrial feed pelleting - reproducibility archive"
+type: software
+authors:
+  - family-names: "Sousa Santos"
+    given-names: "Vladimir"
+    orcid: "https://orcid.org/0000-0001-8808-1914"
+    affiliation: "Department of Energy, Universidad de la Costa, Barranquilla, Colombia"
+  - family-names: "Cabello Eras"
+    given-names: "Juan José"
+    orcid: "https://orcid.org/0000-0003-0949-0862"
+    affiliation: "Department of Mechanical Engineering, Faculty of Engineering, Universidad de Córdoba, Montería, Colombia"
+  - family-names: "Herrera Rodiño"
+    given-names: "Eder Elías"
+    affiliation: "Master's Programme in Mechanical Engineering, Universidad de Córdoba, Montería, Colombia"
+  - family-names: "Arrabal-Campos"
+    given-names: "Francisco Manuel"
+    orcid: "https://orcid.org/0000-0002-5510-6297"
+    affiliation: "Department of Engineering, Research Centre CIAIMBITAL, Escuela Superior de Ingeniería, University of Almería, Almería, Spain"
+version: "v1.0"
+date-released: "2026-10-10"
+url: "https://github.com/fmarrabal/pelleting-energy-baseline-real-data"
+repository-code: "https://github.com/fmarrabal/pelleting-energy-baseline-real-data"
+preferred-citation:
+  type: article
+  title: "Explainable production-adjusted electrical-energy baselines for industrial feed pelleting"
+  authors:
+    - family-names: "Sousa Santos"
+      given-names: "Vladimir"
+    - family-names: "Cabello Eras"
+      given-names: "Juan José"
+    - family-names: "Herrera Rodiño"
+      given-names: "Eder Elías"
+    - family-names: "Arrabal-Campos"
+      given-names: "Francisco Manuel"
+  year: 2026

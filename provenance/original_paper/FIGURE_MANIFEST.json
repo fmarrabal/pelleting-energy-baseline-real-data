@@ -1,0 +1,118 @@
+{
+  "00_framework": {
+    "type": "baseline inputs and outputs with actual worked example",
+    "example_source_row": 2080,
+    "example_prediction_kWh": 255.89644053573528,
+    "example_observed_kWh": 267.3,
+    "native_intervals_90_95": true
+  },
+  "01_records_and_partitions": {
+    "source_records": 2745,
+    "machine_counts": {
+      "Pellet 1": 730,
+      "Pellet 2": 1148,
+      "Pellet 3": 867
+    },
+    "retained": [
+      1542,
+      380,
+      798
+    ],
+    "candidate": [
+      1556,
+      391,
+      798
+    ],
+    "calendar_days": 90,
+    "zero_record_day_not_zero_load": true
+  },
+  "02_production_and_energy": {
+    "positive_energy_points": 2742,
+    "mass_cdf_records": 2745,
+    "batch_count_records": 2745,
+    "family_records": 2745,
+    "truncation": false
+  },
+  "07_windows": {
+    "target_source_row": 823,
+    "donors": [
+      753,
+      744,
+      754,
+      731,
+      715,
+      716,
+      755,
+      717,
+      734,
+      789,
+      790,
+      773,
+      767,
+      784,
+      808,
+      791
+    ],
+    "actual_timestamps": true,
+    "context": 16,
+    "horizon_records": 1
+  },
+  "03_development_and_hypotheses": {
+    "records_per_method": 800,
+    "methods": 7,
+    "hypotheses": 3,
+    "archived_intervals": true,
+    "new_panels": "machine and week MAE differences recalculated from unchanged archived predictions"
+  },
+  "08_gpu_comparison": {
+    "records": 584,
+    "methods": 8,
+    "resamples": 5000,
+    "unit": "kWh per record",
+    "all_intervals_full_range": true
+  },
+  "09_gpu_stratification": {
+    "records": 584,
+    "every_fold_and_machine": true,
+    "cell_text_untruncated": true
+  },
+  "10_gpu_all_predictions": {
+    "points": 4672,
+    "records_per_method": 584,
+    "no_subsampling": true,
+    "TimesFM_full_range_inset": true
+  },
+  "11_explanation": {
+    "coefficient_count": 22,
+    "decomposed_test_records": 798,
+    "example_source_row": 2080,
+    "example_rule": "nearest median observed test energy, then source row",
+    "jitter_only_display": true,
+    "causal_effects": false
+  },
+  "04_original_test_scatter": {
+    "all_test_records": 798,
+    "shared_axis_full_range": true,
+    "test_reused_for_selection": false
+  },
+  "05_all_test_records": {
+    "records": 798,
+    "bounds": 1596,
+    "individual_intervals_not_continuous_band": true,
+    "outside_95": 54
+  },
+  "06_uncertainty_tradeoff": {
+    "records_per_policy": 798,
+    "posthoc_update": true,
+    "nominal_levels": [
+      90,
+      95
+    ],
+    "point_predictions_unchanged": true
+  },
+  "12_numerical_and_seeds": {
+    "Chronos_paired_records": 584,
+    "seed_predictions": 3504,
+    "not_a_new_model_selection": true
+  }
+}

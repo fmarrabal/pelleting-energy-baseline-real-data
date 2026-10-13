@@ -1,0 +1,15 @@
+\begin{table}[!htbp]\centering\footnotesize
+\caption{CPU and GPU runs of the same protocol on the 584 matched targets. TFT and N-HiTS were trained afresh on each device; foundation-model weights were frozen on both.}\label{tab:s_cpu_gpu}
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Method & CPU MAE & GPU MAE & CPU RMSE & GPU RMSE & GPU $-$ CPU MAE \\\midrule
+Ridge, current inputs & 53.5457 & 53.5457 & 77.0140 & 77.0140 & 0.0000 \\
+Ridge, full 16-record window & 63.9491 & 63.9491 & 85.9487 & 85.9487 & 0.0000 \\
+TFT & 53.2484 & 53.6507 & 79.0792 & 79.1050 & 0.4023 \\
+N-HiTS & 66.3527 & 65.2784 & 93.6651 & 92.5581 & $-1.0744$ \\
+Chronos-2 + covariates & 85.6480 & 85.5268 & 121.1050 & 120.8235 & $-0.1211$ \\
+TimesFM 2.5, energy only & 96.3980 & 96.3980 & 130.7237 & 130.7237 & $-0.0000$ \\
+Chronos-2, energy only & 100.0225 & 100.0225 & 136.4695 & 136.4695 & $-0.0000$ \\
+TimesFM 2.5 + XReg & 112.1213 & 112.1213 & 644.6068 & 644.6068 & $-0.0000$ \\
+\bottomrule
+\end{tabular}
+\end{table}

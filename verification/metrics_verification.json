@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "comparisons": 12,
+  "source": "frozen predictions; no model fitting or model selection"
+}

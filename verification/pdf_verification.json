@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "pages": 24,
+  "original_sha256": "1eec250fcc5a27529d1dab2e84f8515c73aa6716a2e6cb0d983c465d652403ba",
+  "rebuilt_sha256": "e4ad9e8e592700bda38bcb2196a5b762b7d74067d4eb6e60e70da8b4b8409436",
+  "note": "Build metadata and regenerated figure metadata may change PDF bytes. Original delivery is preserved."
+}

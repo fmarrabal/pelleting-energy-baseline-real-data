@@ -1,0 +1,60 @@
+% Explainable production-adjusted electrical-energy baselines for industrial feed pelleting -- manuscript for Engineering Applications of Artificial Intelligence (Elsevier)
+% Compile: pdflatex -> bibtex -> pdflatex -> pdflatex  (or latexmk -pdf main.tex)
+% main_review.tex produces the Editorial Manager version (line numbers, double spacing).
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{amsmath,mathtools,graphicx,booktabs,tabularx,array}
+\usepackage{microtype,xcolor,placeins}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!45!black,pdftitle={Explainable production-adjusted electrical-energy baselines for industrial feed pelleting},pdfauthor={Sousa Santos, Cabello Eras, Herrera Rodino, Arrabal-Campos}]{hyperref}
+\usepackage{orcidlink}
+\ifdefined\withlinenumbers\usepackage[mathlines]{lineno}\fi % set by main_review.tex
+\urlstyle{same}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\topfraction}{.9}\renewcommand{\bottomfraction}{.8}
+\renewcommand{\textfraction}{.08}\renewcommand{\floatpagefraction}{.75}
+\newcommand{\ind}{\mathbf{1}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\fig}[4]{\begin{figure}[!htbp]\centering\includegraphics[width=#3\linewidth]{figures/#1.pdf}\caption{#4}\label{fig:#2}\end{figure}}
+\journal{Engineering Applications of Artificial Intelligence}
+
+\begin{document}
+\ifdefined\withlinenumbers\linenumbers\fi
+\begin{frontmatter}
+\title{Explainable production-adjusted electrical-energy baselines for industrial feed pelleting}
+
+\input{sections/authors}
+
+\begin{abstract}
+A plant running an energy management system needs to know how much electricity an operation should have used given what it processed. In feed pelleting the usual answer, one specific energy consumption (SEC) per line, cannot tell an inefficient operation from an unusual product mix. We built a production-adjusted electricity baseline on 2,745 real records from three industrial lines, with dosed mass, dosing-batch count, product characteristics, line identity and calendar variables as inputs, and asked whether histories of completed operations, temporal models or pretrained foundation models add anything to it. Seven estimators were compared on 800 chronologically ordered development targets; the selected Ridge regression was then frozen, with its interval calibration, and evaluated once against line-specific SEC on 798 later records. Eight current-input, history-enabled, temporal and pretrained configurations were compared on 584 matched targets sharing 16 completed same-line operations as context. Ridge reduced test MAE from 61.29 to 52.45~kWh, 14.42\% below SEC, on all three lines; this is a lower prediction error, not an energy saving. The Temporal Fusion Transformer reached 53.65~kWh against 53.55~kWh for current-input Ridge, with no evidence of paired improvement; N-HiTS, TimesFM~2.5 and Chronos-2 were less accurate. Every estimate decomposes exactly into its inputs, and fixed 90\% and 95\% residual intervals covered 85.96\% and 93.23\% of the test records, with one line systematically underestimated. The baseline is ready for retrospective assessment and for a digital twin; prospective use needs verified inputs, line-specific acceptance criteria and a new consecutive period.
+\end{abstract}
+
+\begin{highlights}
+\item Production-adjusted electricity baseline from 2,745 real feed-pelleting records
+\item Frozen Ridge model cuts test MAE by 14.42\% relative to line-specific SEC
+\item TFT, N-HiTS, TimesFM 2.5 and Chronos-2 add no accuracy on identical plant records
+\item Exact additive decomposition traces each kWh estimate to recorded production inputs
+\item Fixed 90\%/95\% residual intervals cover 85.96\% and 93.23\% of later test records
+\end{highlights}
+
+\begin{keyword}
+feed pelleting \sep industrial energy baseline \sep time-series foundation models \sep chronological validation \sep prediction intervals \sep explainable machine learning
+\end{keyword}
+\end{frontmatter}
+
+\input{sections/nomenclature}
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusions}
+\input{sections/declarations}
+\input{sections/appendix}
+\FloatBarrier
+\input{sections/ai_declaration}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+\end{document}
